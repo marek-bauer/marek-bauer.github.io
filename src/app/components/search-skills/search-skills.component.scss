@@ -1,0 +1,74 @@
+@import "../../../variables.scss";
+
+.header {
+  position: relative;
+  cursor: pointer;
+}
+
+.categoryName {
+  font-family: "Poetsen One", sans-serif;
+  font-size: 36px;
+  margin-right: 44px;
+}
+
+.categoryName span {
+  color: $secondary-color;
+}
+
+.categoryArrow {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 14px;
+  right: 6px;
+  transition: .3s ease-in-out;
+}
+
+.catClosed .categoryArrow {
+  transform: rotate(180deg);
+}
+
+.catOpened .categoryArrow {
+  transform: rotate(0);
+}
+
+.categoryContent {
+  display: grid;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.categoryContent div {
+  overflow: hidden;
+}
+
+.catOpened .categoryContent {
+  grid-template-rows: 1fr;
+}
+
+.catClosed .categoryContent {
+  grid-template-rows: 0fr;
+}
+
+.categoryArrow div {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  border-right: 3px solid $dropdown-arrow-color;
+  border-top: 3px solid $dropdown-arrow-color;
+  transform: rotate(-45deg);
+  top: 10px;
+  left: 5px;
+  transition: .1s;
+}
+
+.header:hover .categoryArrow div {
+  border-right: 3px solid $support-color;
+  border-top: 3px solid $support-color;
+}
+
+.categoryContent {
+  padding: 0 8px;
+}
+
+

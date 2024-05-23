@@ -1,0 +1,20 @@
+
+<div *ngFor="let c of categories; index as i" 
+     [class]="['category', c.opened ? 'catOpened' : 'catClosed'].join(' ')">
+  <div class="header" (click)="c.opened = !c.opened">
+    <div class="categoryName"><span>{{i + 1}}.</span> {{c.name}}</div>
+    <div class="categoryArrow"><div></div></div>
+  </div>
+  <div class="categoryContent">
+    <div>
+      <div *ngFor="let s of c.skills">
+        <div app-skill [name]="s.name" 
+                       [level]="c.skillLevelFn(s.lvl)"
+                       [percent]="s.lvl"
+                       [noContent]="s.isEmpty()">
+          <ng-template [ngTemplateOutlet]="s.templateRef"></ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+@import "../../variables.scss";
+
+.nav {
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+  font-family: "VT323", monospace;
+}
+
+.nav ul {
+  float: right !important;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.nav mat-icon {
+  transform: scale(1.5);
+  vertical-align: sub;
+  transition: .3s;
+}
+
+.nav mat-icon:hover, .nav mat-icon.active {
+  color: $support-color
+}
+
+.nav a span {
+  color: $secondary-color
+}
+
+.nav a {
+  font-size: 1rem;
+  display: block;
+  padding: 0 15px;
+  cursor: pointer;
+  color: $primary-color;
+  font-size: 20pt;
+}
+
+$line-pos: -10px;
+
+.nav ul a::after {
+  content: '';
+  display: block;
+  background-color: $support-color;
+  height: 3px;
+  transform: translateX(-50%) scaleX(0) translateY($line-pos);
+  transition: .3s ease-in-out;
+}
+
+.nav ul a.active::after, .nav ul a:hover::after {
+  transform: translateX(0) scaleX(1) translateY($line-pos);
+}
+
+.sideBarMenu {
+  width: 100vw;
+  z-index: 4;
+  background-color: $background-variant;
+}
+
+.sideBarMenu ul {
+  margin: 0;
+}
+
+.sideBarMenu a {
+  width: 100%;
+  display: block;
+  color: black;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-bottom: 1px solid $primary-color;
+  font-family: "VT323", monospace;
+  font-size: 20pt;
+  transition: .3s;
+  background-color: $background-variant;
+}
+
+.sideBarMenu ul:first-child {
+  border-top: 1px solid $primary-color;
+}
+
+.sideBarMenu a:hover {
+  background-color: $background-color;
+}

@@ -1,0 +1,24 @@
+<mat-sidenav-container>
+  <mat-sidenav #sideNav class="sideBarMenu" fixedInViewport="fixed" fixedTopGap="56">
+    <ul>
+      <li *ngFor="let page of pages; index as i">
+        <a [routerLink]="page.link" routerLinkActive="active" (click)="sideNav.close()">
+          <span>{{i + 1}}.</span> {{page.name}}
+        </a>
+      </li>
+    </ul>
+  </mat-sidenav>
+</mat-sidenav-container>
+
+<div class="nav">
+  <a (click)="sideNav.toggle()" class="right hide-on-med-and-up">
+    <mat-icon>menu</mat-icon>
+  </a>
+  <ul id="nav-mobile" class="right hide-on-small-and-down">
+    <ul>
+      <li *ngFor="let page of pages; index as i">
+        <a [routerLink]="page.link" routerLinkActive="active"><span>{{i + 1}}.</span> {{page.name}}</a>
+      </li>
+    </ul>
+  </ul>
+</div>

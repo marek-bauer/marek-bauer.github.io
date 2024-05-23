@@ -1,0 +1,63 @@
+@import "../../../variables.scss";
+
+.hidden, .nonHidden {
+  display: grid;
+  overflow: hidden;
+  transition: .6s;
+  width: 100%;
+}
+
+.hidden {
+  grid-template-rows: 0fr;
+}
+
+.nonHidden {
+  grid-template-rows: 1fr;
+}
+
+.hidden > div {
+  overflow: hidden;
+}
+
+.progressBar, .progress {
+  height: 10px;
+  border-radius: 4px;
+  clear: both;
+}
+
+.progressBar {
+  background-color: $progress-background;
+}
+
+.progress {
+  background-color: $progress-color;
+}
+
+.head {
+  position: relative;
+  margin-right: 36px;
+  cursor: pointer;
+}
+
+.arrow {
+  position: absolute;
+  right: -30px;
+  top: 22px;
+}
+
+.name, .level {
+  font-family: "VT323", monospace;
+  font-size: 26px;
+}
+
+.name {
+  float: left;
+}
+
+.level {
+  float: right;
+}
+
+.drop-collapse{
+  padding: 2px 10px;
+}

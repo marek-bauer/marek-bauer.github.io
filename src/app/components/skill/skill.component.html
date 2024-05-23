@@ -1,0 +1,19 @@
+<div [ngClass]="hidden ? 'hidden' : 'nonHidden'">
+  <div [class]="opened ? 'opened' : 'closed'">
+    <div class="head" (click)="opened = !opened">
+      <div class="name">{{name}}</div>
+      <div class="level">{{level}}</div>
+      <div class="progressBar">
+        <div class="progress" [style.width.%]="percent"></div>
+      </div>
+      <div class="arrow" *ngIf="!noContent">
+        <div></div>
+      </div>
+    </div>
+    <div class="drop-collapse" *ngIf="!noContent">
+      <div>
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

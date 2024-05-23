@@ -1,0 +1,46 @@
+@import "../../../variables.scss";
+
+#cv-main {
+  display: flex;
+  width: 100%;
+}
+
+#cv-content {
+  flex-grow: 1;
+  padding: 36px 6px;
+}
+
+
+#timeline {
+  width: $timeline-width;
+  background-image: linear-gradient($timeline-color 60%, rgba(255,255,255,0) 0%);
+  background-position: top;
+  background-size: $timeline-width $timeline-dash;
+  background-repeat: repeat-y;
+  margin: 0 $timeline-pos;
+  position: relative;
+  overflow: visible;
+}
+
+#timeline-start {
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+  border: $timeline-width $timeline-color solid;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $background-color;
+}
+
+#timeline-end {
+  width: 24px;
+  height: 24px;
+  border-bottom: $timeline-width $timeline-color solid;
+  border-right: $timeline-width $timeline-color solid;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -6px) rotate(45deg) skew(12deg, 12deg);
+}

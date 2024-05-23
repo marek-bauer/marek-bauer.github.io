@@ -1,0 +1,17 @@
+<div id="cv-main">
+  <div id="timeline">
+    <div id="timeline-start"></div>
+    <div id="timeline-end"></div>
+  </div>
+  <div id="cv-content">
+    <ng-container *ngFor="let e of preprocesedEvents">
+      <div event [title]="e.ev.title" 
+                 [date]="printDate(e.ev)" 
+                 [style.marginTop.px]="e.dist" 
+                 [icon]="e.ev.icon"
+                 [noContent]="e.ev.isEmpty()">
+        <ng-template [ngTemplateOutlet]="e.ev.templateRef"></ng-template>
+      </div>
+    </ng-container>
+  </div>
+</div>

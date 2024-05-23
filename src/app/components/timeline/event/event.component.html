@@ -1,0 +1,20 @@
+<div [class]="['event', opened ? 'opened' : 'closed'].join(' ')">
+  <div class="header" (click)="opened = !opened">
+    <div class="icon" [ngSwitch]="icon.constructor">
+      <mat-icon *ngSwitchCase="matIcon">{{$any(icon).icon}}</mat-icon>
+      <div *ngSwitchCase="imgIcon"
+        [style.background-image]="'url(assets/' + $any(icon).path + ')'">
+      </div>
+    </div>
+    <div class="title">{{title}}</div>
+    <div class="date">{{date}}</div>
+    <div class="arrow" *ngIf="!noContent">
+      <div></div>
+    </div>
+  </div>
+  <div class="drop-collapse" *ngIf="!noContent">
+    <div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

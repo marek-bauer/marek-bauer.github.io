@@ -1,0 +1,41 @@
+@import "../../../variables.scss";
+
+.row {
+  width: 100%;
+}
+
+h1 {
+  color: $secondary-color;
+  margin-top: 0;
+  font-size: 60pt;
+  font-family: "VT323", monospace;
+}
+
+h2 {
+  color: $support-color;
+  margin-bottom: 0;
+  font-size: 34pt;  
+  font-family: "VT323", monospace;
+}
+
+p {
+  margin-top: 0;
+  font-size: 16pt;
+  color: $primary-color;
+}
+
+#avatar {
+  width: 80%;
+  padding-bottom: 80%;
+  box-shadow: 0 0 16px 16px $background-color inset;
+  background-image: url("/assets/img/avatar_removebg.png");
+  border-radius: 10px;
+  background-size: 99%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 auto;
+}
+
+.right {
+  position: relative;
+}
