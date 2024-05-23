@@ -37,9 +37,14 @@
   cursor: pointer;
   color: $primary-color;
   font-size: 20pt;
+  text-decoration: none;
 }
 
-$line-pos: -10px;
+.right {
+  float: right;
+}
+
+$line-pos: -14px;
 
 .nav ul a::after {
   content: '';
@@ -62,6 +67,11 @@ $line-pos: -10px;
 
 .sideBarMenu ul {
   margin: 0;
+  padding: 0;
+}
+
+.sideBarMenu li {
+  display: block;
 }
 
 .sideBarMenu a {
@@ -75,6 +85,8 @@ $line-pos: -10px;
   font-size: 20pt;
   transition: .3s;
   background-color: $background-variant;
+  text-decoration: none;
+  outline: none;
 }
 
 .sideBarMenu ul:first-child {

@@ -1,7 +1,32 @@
 @import "../../../variables.scss";
 
-.row {
+.main {
   width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.left {
+  width: 60%;
+}
+
+.right {
+  width: 40%;
+}
+
+@media #{$medium-and-down} {
+  .main {
+    flex-direction: column;
+  }
+  
+  .left {
+    width: 100%;
+  }
+  
+  .right {
+    margin-top: 20px;
+    width: 80%;
+  }
 }
 
 h1 {
@@ -36,6 +61,4 @@ p {
   margin: 0 auto;
 }
 
-.right {
-  position: relative;
-}
+
