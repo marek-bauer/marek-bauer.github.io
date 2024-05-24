@@ -1,7 +1,7 @@
 import { Component, Input, NgZone, Inject } from '@angular/core';
 
 @Component({
-  selector: 'typing-text',
+  selector: '[typing-text]',
   standalone: true,
   imports: [],
   templateUrl: './typing-text.component.html',

@@ -4,7 +4,7 @@
   width: 100%;
   height: 56px;
   line-height: 56px;
-  font-family: "VT323", monospace;
+  font-family: $terminal-font;
 }
 
 .nav ul {
@@ -81,7 +81,7 @@ $line-pos: -14px;
   cursor: pointer;
   padding: 4px 8px;
   border-bottom: 1px solid $primary-color;
-  font-family: "VT323", monospace;
+  font-family: $terminal-font;
   font-size: 20pt;
   transition: .3s;
   background-color: $background-variant;

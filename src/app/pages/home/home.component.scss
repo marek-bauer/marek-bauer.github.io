@@ -33,14 +33,14 @@ h1 {
   color: $secondary-color;
   margin-top: 0;
   font-size: 60pt;
-  font-family: "VT323", monospace;
+  font-family: $terminal-font;
 }
 
 h2 {
   color: $support-color;
   margin-bottom: 0;
   font-size: 34pt;  
-  font-family: "VT323", monospace;
+  font-family: $terminal-font;
 }
 
 p {

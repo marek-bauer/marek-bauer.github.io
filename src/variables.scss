@@ -25,7 +25,8 @@ $theme: mat.define-light-theme((
   density: 1
 ));
 
-
+$terminal-font: "VT323", monospace;
+$alt-font: "Poetsen One", sans-serif;;
 
 $primary-color: #40514E !default;
 $secondary-color: #11999E !default;
@@ -38,9 +39,8 @@ $dropdown-arrow-color: #40514E;
 $progress-color: $secondary-color;
 $progress-background: #11999e10;
 
-$btn-color: $secondary-color;
-$btn-background: #00000040;
-$btn-highlight: $support-color;
+$input-background: white;
+$input-highlight: $support-color;
 
 $timeline-color: $primary-color;
 $timeline-highlight: $secondary-color;
