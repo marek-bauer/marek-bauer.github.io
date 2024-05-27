@@ -1,0 +1,13 @@
+<div class="bar" [ngClass]="value == '' ? 'empty' : ''">
+  <mat-icon class="loop">search</mat-icon>
+  <mat-icon class="clear" *ngIf="value != ''" (click)="value = ''">clear</mat-icon>
+  <input type="text" autocomplete="off" [value]="value" (input)="searchInput($event)" 
+    autocomplete="off" (focusout)="selectedSuggestion = 0" (keydown)="onKeydown($event)"
+    placeholder="Type something to search"/>
+  <div class="suggestions">
+    <div *ngFor="let s of shownSuggestions; index as i" (click)="selected(s)" 
+      [ngClass]="i + 1 == selectedSuggestion ? 'selected' : ''">
+      {{s}}
+    </div>
+  </div>
+</div>

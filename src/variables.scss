@@ -32,15 +32,14 @@ $primary-color: #40514E !default;
 $secondary-color: #11999E !default;
 $support-color: #30E3CA !default;
 $background-color:#E4F9F5 !default;
-$background-variant:#f8fffe !default;
+$background-variant: white !default;
+$background-highlight:#e1e1e1 !default;
+$disabled-color: #949494 !default;
 
-$dropdown-arrow-color: #40514E;
+$dropdown-arrow-color: $disabled-color;
 
 $progress-color: $secondary-color;
 $progress-background: #11999e10;
-
-$input-background: white;
-$input-highlight: $support-color;
 
 $timeline-color: $primary-color;
 $timeline-highlight: $secondary-color;

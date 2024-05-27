@@ -1,4 +1,4 @@
-
+<search-bar [suggestions]="test"></search-bar>
 <div *ngFor="let c of categories; index as i" 
      [class]="['category', c.opened ? 'catOpened' : 'catClosed'].join(' ')">
   <div class="header" (click)="c.opened = !c.opened">

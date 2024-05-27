@@ -1,6 +1,7 @@
 import { Component, Directive, Input, ContentChildren, QueryList, TemplateRef} from '@angular/core';
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgTemplateOutlet, NgFor } from '@angular/common';
 import { SkillComponent } from '../skill/skill.component';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 @Directive({
   selector: '[skill]',
@@ -13,7 +14,6 @@ export class Skill{
   constructor(public templateRef: TemplateRef<any>) {}
 
   isEmpty(): boolean{
-    console.log(this.templateRef.elementRef.nativeElement);
     return false//this.templateRef.elementRef.nativeElement.firstChild == undefined
   }
 }
@@ -34,10 +34,18 @@ export class Category{
 @Component({
   selector: 'search-skills',
   standalone: true,
-  imports: [CommonModule, NgTemplateOutlet, SkillComponent, Category],
+  imports: [CommonModule, NgFor, NgTemplateOutlet, SkillComponent, Category, SearchBarComponent],
   templateUrl: './search-skills.component.html',
   styleUrl: './search-skills.component.scss'
 })
 export class SearchSkillsComponent {
   @ContentChildren(Category) categories!: QueryList<Category>;
+
+  test = [
+    {name: "Haskell", aliases: ["hs"]},
+    {name: "Javascript", aliases: ["JS", "Java"]},
+    {name: "Purescript", aliases: ["PS", "Java"]},
+    {name: "Mickiewicz", aliases: ["Dizady", "Pan Tadeusz"]},
+    {name: "Kochanowski", aliases: ["Treny"]},
+  ]
 }

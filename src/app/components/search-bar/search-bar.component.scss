@@ -1,0 +1,96 @@
+@import "../../../variables.scss";
+
+.bar {
+  background-color: $background-variant;
+  position: relative;
+  height: 36px;
+  border-bottom: 2px solid $primary-color;
+  overflow: visible;
+  transition: .3s;
+}
+
+.empty {
+  background-color: $background-color;
+  border-bottom: 2px solid $disabled-color;
+}
+
+.bar:focus-within {
+  background-color: $background-variant;
+  border-bottom: 2px solid $support-color;
+}
+
+mat-icon {
+  width: 38px;
+  height: 38px;
+  font-size: 36px;
+  transition: 0.3s;
+}
+
+.empty mat-icon {
+  color: $disabled-color;
+}
+
+.bar:focus-within mat-icon, mat-icon:hover {
+  color: $support-color;
+}
+
+.loop {
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+}
+
+.clear {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+input {
+  width: calc(100% - 36px * 2);
+  border: 0;
+  color: $primary-color;
+  background-color: #00000000;
+  padding: 4px;
+  padding-left: 36px;
+  padding-right: 36px;
+  outline: none;
+  font-size: 18pt;
+}
+
+input::placeholder, input::-moz-placeholder {
+  color: $disabled-color;
+}
+
+.suggestions {
+  margin-top: 4px;
+  z-index: 4;
+  position: relative;
+  display: none;
+  transition: display .1s;
+}
+
+.bar:focus-within .suggestions, .suggestions:hover {
+  display: block;
+}
+
+.suggestions div {
+  cursor: pointer;
+  padding: 9px;
+  font-size: 15pt;
+  border-bottom: 1px solid $primary-color;
+  background-color: $background-variant;
+  transition: background-color .3s;
+}
+
+.suggestions div.selected, .suggestions div:hover {
+  background-color: $background-highlight;
+}
+
+.suggestions div:last-child {
+  border-bottom: 0px;
+}
+
+.suggestions div span{
+  color: $support-color;
+}
