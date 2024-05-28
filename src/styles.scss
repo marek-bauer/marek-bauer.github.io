@@ -66,6 +66,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   transform: rotate(-45deg);
 }
 
+.div:hover > .arrow > div {
+  border-right: 3px solid $support-color;
+  border-top: 3px solid $support-color;
+}
+
 .closed .arrow{
   transform: rotate(180deg);
 }

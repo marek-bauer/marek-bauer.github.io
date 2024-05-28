@@ -1,21 +1,18 @@
 @import "../../../variables.scss";
 
-.hidden, .nonHidden {
+.skill {
   display: grid;
   overflow: hidden;
   transition: .6s;
   width: 100%;
-}
-
-.hidden {
-  grid-template-rows: 0fr;
-}
-
-.nonHidden {
   grid-template-rows: 1fr;
 }
 
-.hidden > div {
+div.skill.hidden {
+  grid-template-rows: 0fr;
+}
+
+.skill > div {
   overflow: hidden;
 }
 

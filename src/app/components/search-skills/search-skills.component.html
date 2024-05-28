@@ -1,20 +1,29 @@
-<search-bar [suggestions]="test"></search-bar>
-<div *ngFor="let c of categories; index as i" 
-     [class]="['category', c.opened ? 'catOpened' : 'catClosed'].join(' ')">
-  <div class="header" (click)="c.opened = !c.opened">
-    <div class="categoryName"><span>{{i + 1}}.</span> {{c.name}}</div>
-    <div class="categoryArrow"><div></div></div>
-  </div>
-  <div class="categoryContent">
-    <div>
-      <div *ngFor="let s of c.skills">
-        <div app-skill [name]="s.name" 
-                       [level]="c.skillLevelFn(s.lvl)"
-                       [percent]="s.lvl"
-                       [noContent]="s.isEmpty()">
-          <ng-template [ngTemplateOutlet]="s.templateRef"></ng-template>
-        </div>
+<search-bar [suggestions]="suggestions" (search)="onSearch($event)"></search-bar>
+@for (c of categories; track c; let i = $index;) {
+  <div [class]="['category', c.opened ? 'catOpened' : 'catClosed'].join(' ')">
+    <div class="header" (click)="c.opened = !c.opened">
+      <div class="categoryName"><span>{{i + 1}}.</span> {{c.name}}</div>
+      <div class="categoryArrow"><div></div></div>
+    </div>
+    <div class="categoryContent">
+      <div>
+        @for (s of c.skills; track s;) {
+          <div>
+            <div app-skill [name]="s.name" 
+                           [level]="c.skillLevelFn(s.lvl)"
+                           [percent]="s.lvl"
+                           [hidden]="!shownSkills.has(s.name)"
+                           [noContent]="s.noContent">
+              <ng-template [ngTemplateOutlet]="s.templateRef"></ng-template>
+              <mat-chip-set class="tags" aria-label="Tags">
+                @for (tag of s.tags; track tag) {
+                  <mat-chip color="accent">{{tag}}</mat-chip>
+                }
+              </mat-chip-set>
+            </div>
+          </div>
+        }
       </div>
     </div>
   </div>
-</div>
+}

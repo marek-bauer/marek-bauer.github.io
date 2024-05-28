@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import Fuse from 'fuse.js'
+import Fuse from 'fuse.js';
 
 const fuseOptions = {
 	threshold: 0.4,
@@ -89,7 +89,6 @@ export class SearchBarComponent {
   }
 
   selected(s: string) {
-    console.log(s);
     this.value = s;
   }
 }
