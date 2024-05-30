@@ -27,6 +27,7 @@
   max-width: 1280px;
   width: 90%;
 }
+
 @media #{$medium-and-up} {
   .container {
     width: 85%;
@@ -46,15 +47,27 @@ html {
   background-color: $background-color;
 }
 
-html, body { height: 100%; }
+body {
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+app-root { 
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
 
 .arrow {
   width: 18px;
   height: 18px;
   transition: .3s ease-in-out;
 }
+
 .arrow > div {
   width: 12px;
   height: 12px;

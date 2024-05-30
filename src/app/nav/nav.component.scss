@@ -1,13 +1,13 @@
 @import "../../variables.scss";
 
-.nav {
+nav {
   width: 100%;
   height: 56px;
   line-height: 56px;
   font-family: $terminal-font;
 }
 
-.nav ul {
+nav ul {
   float: right !important;
   list-style-type: none;
   margin: 0;
@@ -16,21 +16,21 @@
   justify-content: flex-end;
 }
 
-.nav mat-icon {
+nav mat-icon {
   transform: scale(1.5);
   vertical-align: sub;
   transition: .3s;
 }
 
-.nav mat-icon:hover, .nav mat-icon.active {
+nav mat-icon:hover, nav mat-icon.active {
   color: $support-color
 }
 
-.nav a span {
+nav a span {
   color: $secondary-color
 }
 
-.nav a {
+nav a {
   font-size: 1rem;
   display: block;
   padding: 0 15px;
@@ -46,7 +46,7 @@
 
 $line-pos: -14px;
 
-.nav ul a::after {
+nav ul a::after {
   content: '';
   display: block;
   background-color: $support-color;
@@ -55,7 +55,7 @@ $line-pos: -14px;
   transition: .3s ease-in-out;
 }
 
-.nav ul a.active::after, .nav ul a:hover::after {
+nav ul a.active::after, nav ul a:hover::after {
   transform: translateX(0) scaleX(1) translateY($line-pos);
 }
 
@@ -79,10 +79,10 @@ $line-pos: -14px;
   display: block;
   color: black;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 8px 8px;
   border-bottom: 1px solid $primary-color;
   font-family: $terminal-font;
-  font-size: 20pt;
+  font-size: 22pt;
   transition: .3s;
   background-color: $background-variant;
   text-decoration: none;
@@ -94,5 +94,5 @@ $line-pos: -14px;
 }
 
 .sideBarMenu a:hover {
-  background-color: $background-color;
+  background-color: $background-highlight;
 }
