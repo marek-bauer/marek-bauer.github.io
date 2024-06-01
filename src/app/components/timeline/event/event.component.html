@@ -1,4 +1,4 @@
-<div [class]="['event', opened ? 'opened' : 'closed'].join(' ')">
+<div [id]="title" [class]="['event', opened ? 'opened' : 'closed'].join(' ')">
   <div class="header" (click)="opened = !opened">
     <div class="icon" [ngSwitch]="icon.constructor">
       <mat-icon *ngSwitchCase="matIcon">{{$any(icon).icon}}</mat-icon>

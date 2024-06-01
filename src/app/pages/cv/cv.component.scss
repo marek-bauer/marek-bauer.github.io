@@ -6,3 +6,11 @@ h1 {
   font-size: 45pt;
   font-family: $terminal-font;
 }
+
+p {
+  margin-bottom: 0;
+}
+
+a {
+  color: $primary-color;
+}

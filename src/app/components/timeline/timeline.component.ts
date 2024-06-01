@@ -2,8 +2,12 @@ import { Component, ContentChildren, Directive, QueryList, Input, TemplateRef } 
 import { EventComponent, ImgIcon, MatIcon } from './event/event.component';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 
-function readDate(a: string): Date {
-  return new Date(a);
+function readDate(a: string): Date | 'Now' {
+  if (a == 'Now') {
+    return 'Now'
+  } else {
+    return new Date(a);
+  }
 }
 
 function readIcon(a: string): MatIcon | ImgIcon {
@@ -21,9 +25,9 @@ function readIcon(a: string): MatIcon | ImgIcon {
   standalone: true,
 })
 export class Ev{
-  @Input({required: true}) title!: string;
+  @Input({required: true}) attempt!: string;
   @Input({required: true, transform: readDate}) startDate!: Date;
-  @Input({required: false, transform: readDate}) endDate?: Date | undefined;
+  @Input({required: false, transform: readDate}) endDate?: Date | 'Now' | undefined;
   @Input({required: true, transform: readIcon}) icon!: MatIcon | ImgIcon;
   @Input({required: false}) opened: boolean = false;
 
@@ -51,14 +55,18 @@ export class TimelineComponent {
     return Math.min(Math.abs(y.getTime() - x.getTime()) / MILISECONDS_IN_YEAR * 30, 160)
   }
 
-  private dateToName(d: Date) {
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"
-    ];
-    return monthNames[d.getMonth()] + ' ' + d.getFullYear()
+  private dateToName(d: Date | 'Now'): string {
+    if (d == 'Now') {
+      return 'Now'
+    } else {
+      const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+      return monthNames[d.getMonth()] + ' ' + d.getFullYear()
+    }
   }
 
-  printDate(e: Ev) {
+  printDate(e: Ev): string {
     if (e.endDate === undefined) {
       return this.dateToName(e.startDate);
     } else {

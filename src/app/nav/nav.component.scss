@@ -7,6 +7,14 @@ nav {
   font-family: $terminal-font;
 }
 
+@media #{$small-and-down} {
+  nav {
+    display: fixed;
+    top: 0;
+    left: 0;
+  }
+}
+
 nav ul {
   float: right !important;
   list-style-type: none;

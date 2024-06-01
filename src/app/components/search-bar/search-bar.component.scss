@@ -67,6 +67,7 @@ input::placeholder, input::-moz-placeholder {
   z-index: 4;
   position: relative;
   display: none;
+  background-color: $background-variant;
   transition: display .1s;
 }
 

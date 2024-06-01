@@ -5,7 +5,7 @@
   </div>
   <div id="cv-content">
     <ng-container *ngFor="let e of preprocesedEvents">
-      <div event [title]="e.ev.title" 
+      <div event [title]="e.ev.attempt" 
                  [date]="printDate(e.ev)" 
                  [style.marginTop.px]="e.dist" 
                  [icon]="e.ev.icon"
