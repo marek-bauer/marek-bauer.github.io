@@ -60,6 +60,7 @@ app-root {
 
 main {
   flex: 1 0 auto;
+  color: $primary-color;
 }
 
 .arrow {
@@ -77,11 +78,12 @@ main {
   border-top: 2px solid $dropdown-arrow-color;
   border-right: 2px solid $dropdown-arrow-color;
   transform: rotate(-45deg);
+  transition: .3s;
 }
 
 div:hover > .arrow > div {
-  border-right: 3px solid $support-color;
-  border-top: 3px solid $support-color;
+  border-right: 2px solid $support-color;
+  border-top: 2px solid $support-color;
 }
 
 .closed .arrow{

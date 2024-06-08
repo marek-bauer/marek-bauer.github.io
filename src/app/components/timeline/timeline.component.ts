@@ -25,7 +25,7 @@ function readIcon(a: string): MatIcon | ImgIcon {
   standalone: true,
 })
 export class Ev{
-  @Input({required: true}) attempt!: string;
+  @Input({required: true}) title!: string;
   @Input({required: true, transform: readDate}) startDate!: Date;
   @Input({required: false, transform: readDate}) endDate?: Date | 'Now' | undefined;
   @Input({required: true, transform: readIcon}) icon!: MatIcon | ImgIcon;

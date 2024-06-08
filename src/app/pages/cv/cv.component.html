@@ -1,6 +1,6 @@
 <h1 typing-text text="Curriculum Vitae" [typingSpeedMs]="130"></h1>
 <app-timeline>
-  <ng-template ev attempt="First computer program" startDate="2008-10-03" icon="mat:lightbulb_outline">
+  <ng-template ev title="First computer program" startDate="2008-10-03" icon="mat:lightbulb_outline">
     <p>
       As a kid, I always dreamed about an all-powerful and almighty program that
       could be used to create other computer programs. However, I didn't ask my
@@ -15,7 +15,7 @@
     </p>
   </ng-template>
 
-  <ng-template ev attempt="Second attempt at programming" startDate="2011-03-03" icon="mat:lightbulb_outline">
+  <ng-template ev title="Second attempt at programming" startDate="2011-03-03" icon="mat:lightbulb_outline">
     <p>
       A couple of years after my failed attempt at being a C++ programmer, I
       decided to give programming a second try. At this time, I was playing
@@ -37,8 +37,164 @@
     </p>
   </ng-template>
 
-  <ng-template ev attempt="GG WP 3" startDate="2024-03-01" icon="mat:ac_unit">
-    <p>test</p>
+  <ng-template ev title="Technical High School" startDate="2014-09-01" endDate="2018-05-22" icon="mat:school">
+    <p>
+      My real journey with programming started at <a
+      href="https://www.mechanik.rac.pl/">Technical High School "Mechanik"</a>
+      where I started my next educational stage in the IT technician profile. In
+      the first and second years, the focus was on the technical aspects of how
+      computers work and how to fix them. You can only imagine how many drivers
+      for non-working network interfaces I needed to install. But there were
+      also programming assignments and puzzles. I learned the basics of
+      algorithmic complexity, so I learned why my custom version of bubble sort
+      is not the best sorting algorithm ever. However, I am still proud of my
+      version. During my education there, I passed 3 professional examinations:
+    </p>
+    <ul>
+      <li>E12 - Assembly and operation of personal computers and peripheral devices</li>
+      <li>E13 - Designing local computer networks and network administration</li>
+      <li>E14 - Creating web applications and databases, and administering databases</li>
+    </ul>
+    <p>
+      So I have basic knowledge of how to clean up my laptop and configure a
+      router, which is quite useful when you spend most of your life in front of
+      a PC. My programming journey at this stage was mostly in the C++ language.
+      I learned most of its features, such as overloading operators, classes,
+      pointers, and even more advanced data structures like lists and binary
+      trees. I developed multiple websites, and most of my CSS knowledge was
+      obtained there. Overall, my knowledge of how computers work was greatly
+      improved.
+    </p>
+    <p>
+      In my third year, I was obligated to do a one-month internship.
+      Fortunately, as one of the best students at my high school, I qualified
+      for the Erasmus+ student exchange program. Together with my friends, I was
+      sent to Brunswick, Germany, where we worked at the PTS Institute. This is
+      where I learned the basics of programming microcontrollers, and I even
+      developed my own clone of the <a href='https://github.com/marek-bauer/Snake'>
+      Snake game</a> for <a href='https://www.arduino.cc/'>Arduino</a>.
+    </p>
+  </ng-template>
+
+  <ng-template ev title="Wrocław University of Science and Technology" startDate="2018-10-01" endDate="2022-01-29" icon="mat:school">
+    <p>
+      This was the moment I was preparing for during half of my education. I was
+      really excited to move out of my parents' house and start to learn really
+      interesting subjects, instead of some boring literature. The reality was
+      slightly different. The first problem was that I went to a different
+      university than my friends from high school, so I needed to find new
+      friends. The second was the cultural shock from the formal approach to
+      mathematics. I still remember my confusion when my first task was to prove
+      that one is not equal to zero. However, after the initial shock, I quite
+      quickly adjusted to this system where every theorem needed to have a
+      proof, and to this day I love nice mathematical proofs.
+    </p>
+    <p>
+      After learning the basics of mathematics, there were more technical
+      classes where we learned the basics of programming. I learned the basics
+      of C and Java languages and techniques of proving algorithm correctness.
+      Unfortunately, those were imperative algorithms, so I needed to find some
+      <a href="https://en.wikipedia.org/wiki/Loop_invariant">loop
+      invariants</a>, which was annoying since proving something by induction is
+      way easier. I was also forced to learn some <a
+      href="https://en.wikipedia.org/wiki/Software_design_pattern">design
+      patterns</a>, which can be useful, but learning them all by heart was
+      inhumane torture.
+    </p>
+    <p>
+      Then, in my fourth semester, the COVID-19 pandemic reached Poland, and we
+      were forced to start learning remotely. At first, it was nice to have 2
+      weeks off, but after that, I needed to start doing assignments. During the
+      pandemic, I learned Prolog, metaheuristic algorithms, topology, and some
+      less fun subjects like computer graphics and web development.
+    </p>
+    <p>
+      Overall, I had a great time at my university. I made a lot of friends and
+      started to really love mathematics. I was even a recipient of the
+      Headmaster's scholarship, so my budget was not affected.
+    </p>
+  </ng-template>
+
+  <ng-template ev title='"Lambda" science club' startDate="2018-11-01" endDate="Now" icon="mat:school">
+    <p>
+      As a new guy in town, I needed to find friends, and for weird guy who
+      loves math, there is no better place to do so than a science club. So I
+      decided to become a member of one. To be honest, my choice was based
+      mostly on the after-club activity of eating pizza. So despite the fact
+      that at the moment I was not that interested in functional programming and
+      formal methods, I became a member of the "Lambda" science club.
+    </p>
+    <p>
+      The main focus of the club at the beginning was teaching new members,
+      including me, the COQ proof assistant. Later, I also learned Haskell and
+      Rust, two of my favorite programming languages. This was the place where I
+      started to love functional programming for its strict type systems, which
+      help you catch most of the stupidest errors before you even start your
+      program.
+    </p>
+    <p>
+      To this day we meet almost every Wednesday to talk about new developments
+      in type theory. 
+    </p>
+  </ng-template>
+
+  <ng-template ev title='Quant Scholarship Program' startDate="2020-10-01" endDate="2021-04-01" icon="mat:school">
+    <p>
+      In my third year, I decided to enroll in the Quant Scholarship Program by
+      Credit Suisse. After an entrance exam and interview, I was accepted. This
+      program focused on two components. The first component was financial
+      mathematics, where I learned how the <a
+      href="https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model">Black-Scholes
+      model</a> works, how to value European and American options, and other
+      valuation methods like the Monte Carlo method. The second component was
+      focused on the F# language. To graduate from this program, I prepared a <a
+      href="https://github.com/marek-bauer/Option-pricer">simple F# program
+      valuing various financial instruments</a>.
+    </p>
+  </ng-template>
+
+  <ng-template ev title='Siemens Digital Logistics' startDate="2021-03-01" endDate="2022-10-30" icon="mat:work">
+    <p>
+      In order to graduate from my studies, I needed to do some internship.
+      Since I could not find an interesting internship offer, I decided to start
+      working as a part-time software developer. I applied for a couple of
+      positions but finally decided that a position at Siemens was the best one
+      due to their position in the market. After a short introduction and health
+      and safety course, I was able to learn what working as a programmer looks
+      like. At first, I was a bit overwhelmed by the size of the codebase. But I
+      quickly figured out that it is best to start working on some small tasks
+      instead of scrolling through large chunks of code. I liked my position for
+      the variety of different middle-sized to small projects. During my one and
+      a half years there, I worked on:
+    </p>
+    <ul>
+      <li>Native Android application for a logistics center</li>
+      <li>Ionic application for a postal company</li>
+      <li>Java GWT application for managing a logistics center</li>
+      <li>Developing a tool for Android test automation</li>
+      <li>Developing a Spring application for managing luggage transfer for a small airport</li>
+    </ul>
+    <p>
+      Working at Siemens was a great journey that shaped me as a programmer. I
+      remember it fondly as being part of a great team, but after getting a job
+      position in Haskell, I decided to move on since I could not waste that
+      opportunity.
+    </p>
+  </ng-template>
+
+  <ng-template ev title='Bachelor of Science dissertation' startDate="2021-12-12" icon="mat:edit">
+    <p>
+      My dissertation was based on the problem of generating true random numbers
+      on a deterministic machine, stemming from my fascination with probability
+      theory at the time. At the beginning, I considered multiple approaches to
+      this problem, such as developing a game in which user behavior would be
+      the source of entropy or using a public API for that. However, both
+      approaches would be hard to test for their validity. So I decided to use
+      the response time of websites as my source of entropy. In the end, this
+      approach also had a lot of problems which made it impractical. However, I
+      learned a lot about how to test randomness and I was able to graduate, so 
+      I consider this as a success.
+    </p>
   </ng-template>
 </app-timeline>
 
