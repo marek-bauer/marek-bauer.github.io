@@ -12,7 +12,7 @@ import { FooterComponent } from "./footer/footer.component";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'My-portfolio-webpage';
+  title = 'my-portfolio-webpage';
   pages = [
     {link: '/home', name: 'Home'},
     {link: '/cv', name: 'Cv'},
