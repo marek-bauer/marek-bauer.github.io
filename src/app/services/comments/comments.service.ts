@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from "../auth/auth.service";
-import { Firestore, addDoc, collection, getCountFromServer, query, getDocs, QueryDocumentSnapshot, DocumentData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, getCountFromServer, query, getDocs, QueryDocumentSnapshot, DocumentData, Timestamp } from '@angular/fire/firestore';
 
-type Comment = {
+export type Comment = {
   id: string,
   content: string,
   author: string,
@@ -15,19 +14,14 @@ type Comment = {
 export class CommentsService {
 
   constructor(
-    private auth: AuthService,
     private firestore: Firestore,
   ) { }
 
-  public async addComment(key: string, content: string): Promise<boolean> {
-    const user = this.auth.userUid();
-    if (user === null) {
-      return false;
-    }
-    return addDoc(collection(this.firestore, this.fireKeyForUser(key, user)), {
+  public async addComment(key: string, content: string, author: string): Promise<boolean> {
+    return addDoc(collection(this.firestore, this.fireKey(key)), {
       content: content,
-      author: this.auth.userName(),
-      timestamp: Date.now()
+      author: author,
+      timestamp: Timestamp.now()
     }).then(docRef => {
       return true;
     }).catch(error => {
@@ -36,30 +30,33 @@ export class CommentsService {
     })
   }
 
-  private async fetchAllUserComments(key: string, userId: string): Promise<Array<Comment>> {
-    const q = query(collection(this.firestore, this.fireKeyForUser(key, userId)));
+  private async fetchComments(key: string): Promise<Array<Comment>> {
+    const q = query(collection(this.firestore, this.fireKey(key)));
     const snapshot = await getDocs(q);
     return snapshot.docs
       .map(this.docToComment)
       .filter((mComment) : mComment is Comment => mComment !== null);
   }
 
-  private async fetchAllComments(key: string): Promise<Array<Comment>> {
-    const q = query(collection(this.firestore, this.fireKey(key)));
-    const snapshot = await getDocs(q);
-    const comments = await Promise.all(
-      snapshot.docs
-        .map((doc) => doc.id)
-        .map((userId) => this.fetchAllUserComments(key, userId))
-    );
-    return comments.flat();
+  private async fetchCommentCount(key: string): Promise<number> {
+    const coll = collection(this.firestore, this.fireKey(key));
+    return getCountFromServer(coll)
+      .then(snapshot => snapshot.data().count);
+  }
+
+  public async getComments(key: string): Promise<Array<Comment>> {
+    return this.fetchComments(key);
+  }
+
+  public async countComments (key: string): Promise<number> {
+    return this.fetchCommentCount(key);
   }
 
   private docToComment(doc: QueryDocumentSnapshot<DocumentData, DocumentData>): Comment | null {
     const id: string = doc.id;
     const content: string | undefined = doc.data()['content'];
     const author: string | undefined = doc.data()['author'];
-    const timestamp: Date | undefined = doc.data()['timestamp'];
+    const timestamp: Timestamp | undefined = doc.data()['timestamp'];
     if (content === undefined || author === undefined || timestamp === undefined) {
       return null;
     }
@@ -68,16 +65,12 @@ export class CommentsService {
         id: id,
         content: content,
         author: author,
-        timestamp: timestamp
+        timestamp: timestamp.toDate()
       }
     }
   }
 
   private fireKey(key: string): string {
-    return `/comments/article/${key}`
-  }
-
-  private fireKeyForUser(key: string, userId: string): string {
-    return `/comments/article/${key}/users/${userId}` 
+    return `${key}`
   }
 }

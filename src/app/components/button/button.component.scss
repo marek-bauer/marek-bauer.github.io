@@ -1,9 +1,11 @@
 @import "../../../variables.scss";
 
-mat-icon {
+fa-icon {
+  display: inline-block;
   transform: scale(1.4);
+  margin-right: 10px;
 }
 
-a {
+a, button {
   margin: 0 4px;
 }

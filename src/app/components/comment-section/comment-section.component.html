@@ -1,0 +1,53 @@
+<h2>Comments</h2>
+@if (comments === undefined) {
+  <div class="loading">
+    <div>
+      <mat-spinner diameter="80" strokeWidth="8"></mat-spinner>
+    </div>
+  </div>
+} 
+@else {
+  <div class="comments">
+    @if (comments.length === 0) {
+      <div class="noComments">
+        No comments yet
+      </div>
+    }
+    @else {
+      @for (c of comments; track c) {
+      <div class="comment">
+        <div class="author">{{c.author}}</div>
+        <div class="date">{{c.timestamp.toLocaleDateString("en-GB", dateOptions)}}</div>
+        <div class="content">{{c.content}}</div>
+      </div>
+      }
+    }
+  </div>
+  <h3>Leave a comment</h3>
+  <form class="newComment" [formGroup]="formControl">
+    <mat-form-field>
+      <mat-label>Author</mat-label>
+      <input #author matInput type="text" placeholder="Your name"
+             name="author" [formControl]="formControl.controls.author">
+      @if (formControl.controls.author.hasError('required')) {
+        <mat-error>Author is required</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Comment</mat-label>
+      <textarea #content matInput placeholder="Share your opinion..." 
+                cdkTextareaAutosize cdkAutosizeMinRows="2" name="comment"
+                [formControl]="formControl.controls.comment">
+      </textarea>
+      @if (formControl.controls.comment.hasError('required')) {
+        <mat-error>Comment must not be empty</mat-error>
+      }
+      @if (formControl.controls.comment.hasError('couldNotSend')) {
+        <mat-error>Could not publish this comment - check your internet connection</mat-error>
+      }
+    </mat-form-field>
+    <btn id="sendComment" icon="share" (click)="sendComment()" [disabled]="sendingComment">Comment</btn>
+    <btn id="cancelComment" icon="xmark" (click)="cancelComment()" [disabled]="sendingComment">Clear</btn>
+  </form>
+}

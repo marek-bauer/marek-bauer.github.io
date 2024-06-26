@@ -1,4 +1,13 @@
-<a mat-flat-button [href]="target" target="_blank" color="primary">
-  <mat-icon>{{icon}}</mat-icon>
-  <ng-content></ng-content>
-</a>
+@if (target !== undefined) { 
+  <a mat-flat-button [href]="target" target="_blank" color="primary" [disabled]="disabled">
+    <fa-icon [icon]="icon"></fa-icon>
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </a>
+}
+@else {
+  <button mat-flat-button color="primary" [disabled]="disabled">
+    <fa-icon [icon]="icon"></fa-icon>
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </button>
+}
+<ng-template #content><ng-content></ng-content></ng-template>

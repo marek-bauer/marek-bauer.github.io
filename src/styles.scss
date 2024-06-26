@@ -40,7 +40,23 @@
 }
 
 h1, h2, h3 {
+  color: $secondary-color;
+  margin: 0;
+  font-size: 45pt;
   font-weight: 400;
+  font-family: $terminal-font;
+}
+
+h1 {
+  font-size: 45pt;
+}
+
+h2 {
+  font-size: 36pt;
+}
+
+h3 {
+  font-size: 26pt;
 }
 
 html {
