@@ -7,7 +7,7 @@ import { FormControl, Validators, FormsModule, ReactiveFormsModule, FormGroup } 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-comment-section',
+  selector: 'comment-section',
   standalone: true,
   imports: [ButtonComponent, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatProgressSpinnerModule],
   templateUrl: './comment-section.component.html',

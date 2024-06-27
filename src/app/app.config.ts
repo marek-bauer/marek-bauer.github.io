@@ -9,6 +9,8 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
+import { provideHighlightOptions } from 'ngx-highlightjs';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
@@ -26,6 +28,9 @@ export const appConfig: ApplicationConfig = {
         })
     ), 
     provideAuth(() => getAuth()), 
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideHighlightOptions({
+      fullLibraryLoader: () => import('highlight.js')
+    })
   ]
 };
