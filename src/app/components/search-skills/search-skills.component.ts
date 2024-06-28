@@ -1,6 +1,6 @@
 import { Component, Directive, Input, ContentChildren, QueryList, TemplateRef} from '@angular/core';
 import { CommonModule, NgTemplateOutlet, NgFor } from '@angular/common';
-import { SkillComponent } from '../skill/skill.component';
+import { SkillComponent } from './skill/skill.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { MatChipsModule } from '@angular/material/chips';
 import Fuse from 'fuse.js';

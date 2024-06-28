@@ -1,3 +1,4 @@
 <h1>{{ title }}</h1>
-<ng-content (ready)="alert()"></ng-content>
+<p>{{ publicationDate.toLocaleDateString("en-GB", dateOptions) }}</p>
+<ng-template [ngComponentOutlet]="articleContent"></ng-template>
 <comment-section [key]="key"></comment-section>
