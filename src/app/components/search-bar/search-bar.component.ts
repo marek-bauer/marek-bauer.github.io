@@ -20,8 +20,7 @@ const fuseOptions = {
 })
 export class SearchBarComponent {
   @Input() maxSuggestions: number = 3;
-  @Output() search = new EventEmitter<string>();
-
+  
   @Input() set suggestions(val: Array<{name: string, aliases: Array<string>}>) {
     this._suggestions = val;
     this._fuzeSuggestions = new Fuse(val, fuseOptions)
@@ -36,11 +35,13 @@ export class SearchBarComponent {
   
   private _suggestions: Array<{ name: string, aliases: Array<string> }> = [];
   private _fuzeSuggestions: Fuse<{ name: string, aliases: string[] }> | undefined;
-  private _value: string = "";
+  private _search: string = "";
   private _numberOfSuggestions: number = 0;
+  
+  @Output() searchChange = new EventEmitter<string>();
 
-  set value(newVal: string) {
-    this._value = newVal;
+  @Input() set search(newVal: string) {
+    this._search = newVal;
     const searchRes = this._fuzeSuggestions?.search(newVal).map(x => x.item.name);
 
     if (searchRes == undefined || searchRes.length == 0) {
@@ -54,16 +55,16 @@ export class SearchBarComponent {
       }
     }
     this._numberOfSuggestions = this.shownSuggestions.length + 1;
-    this.search.emit(this.value);
+    this.searchChange.emit(this._search);
   }
 
-  get value(): string {
-    return this._value;
+  get search(): string {
+    return this._search;
   }
 
   searchInput(ev: Event) {
     const target = ev.target as HTMLInputElement;
-    this.value = target.value.trim();
+    this.search = target.value.trim();
   }
 
   generateSuggestions(input: string) {
@@ -82,13 +83,13 @@ export class SearchBarComponent {
         break;
       case "Enter":
         if (this.selectedSuggestion != 0) {
-          this.value = this.shownSuggestions[this.selectedSuggestion - 1];
+          this.search = this.shownSuggestions[this.selectedSuggestion - 1];
         }
         break;
     }
   }
 
   selected(s: string) {
-    this.value = s;
+    this.search = s;
   }
 }

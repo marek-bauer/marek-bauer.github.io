@@ -1,7 +1,7 @@
-<div class="bar" [ngClass]="value == '' ? 'empty' : ''">
+<div class="bar" [ngClass]="search == '' ? 'empty' : ''">
   <mat-icon class="loop">search</mat-icon>
-  <mat-icon class="clear" *ngIf="value != ''" (click)="value = ''">clear</mat-icon>
-  <input type="text" autocomplete="off" [value]="value" (input)="searchInput($event)" 
+  <mat-icon class="clear" *ngIf="search != ''" (click)="search = ''">clear</mat-icon>
+  <input type="text" autocomplete="off" [value]="search" (input)="searchInput($event)" 
     autocomplete="off" (focusout)="selectedSuggestion = 0" (keydown)="onKeydown($event)"
     placeholder="Type something to search"/>
   <div class="suggestions">

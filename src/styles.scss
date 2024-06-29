@@ -129,3 +129,12 @@ div:hover > .arrow > div {
 .drop-collapse div {
   overflow: hidden;
 }
+
+.tags span {
+  cursor: pointer;
+}
+
+.tags mat-chip {
+  background-color: $tag-color!important;
+  cursor: pointer;
+}
