@@ -1,0 +1,52 @@
+@import "../../../variables.scss";
+
+.articles > div > div {
+  display: grid;
+  overflow: hidden;
+  transition: grid-template-rows .6s;
+  width: 100%;
+  grid-template-rows: 1fr;
+  border-bottom: 1px solid;
+}
+
+.articles > div > div.hidden {
+  grid-template-rows: 0fr;
+  border-bottom: 0;
+}
+
+.articles > div > div > div {
+  overflow: hidden;
+}
+
+.article {
+  cursor: pointer;
+  padding: 8px;
+  transition: .4s ease-in-out;
+  background-color: #00000000;
+}
+
+.hidden .article {
+  padding: 0 8px;
+}
+
+.article:hover {
+  background-color: $background-highlight;
+}
+
+p {
+  margin: 4px 0;
+}
+
+.extras {
+  text-align: right;
+}
+
+.extras span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
+}
+
+span > mat-icon {
+  margin-right: 6px;
+}

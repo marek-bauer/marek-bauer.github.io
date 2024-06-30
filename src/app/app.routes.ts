@@ -3,13 +3,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { CvComponent } from './pages/cv/cv.component';
 import { SkillsComponent } from './pages/skills/skills.component';
 import { articleList, articleToRoute } from "./pages/articles/articles-list"
-import { ArticleComponent } from './components/article/article.component';
+import { BlogComponent } from "./pages/blog/blog.component"
 
 export const mainRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'cv', component: CvComponent },
-  { path: 'skills', component: SkillsComponent }
+  { path: 'skills', component: SkillsComponent },
+  { path: 'blog', component: BlogComponent }
   ];
 
 export const routes: Routes = 

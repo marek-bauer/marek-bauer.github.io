@@ -53,6 +53,8 @@ export class SearchSkillsComponent {
   suggestions: Array<{name: string, aliases: Array<string>}> = [];
   shownSkills: Set<string> = new Set();
 
+  search: string = "";
+
   private _fuze: Fuse<{ name: string, aliases: string[], tags: string[] }> | undefined;
   private _allSkills: Array<string> = [];
 
@@ -70,7 +72,6 @@ export class SearchSkillsComponent {
   }
 
   onSearch(filter: string) {
-    console.log(filter);
     if (filter == '') {
       this.shownSkills = new Set(this._allSkills);
     } else {
@@ -81,6 +82,9 @@ export class SearchSkillsComponent {
         this.shownSkills = new Set(this._allSkills);
       }
     }
-    
+  }
+
+  selectedTag(tag: string):void {
+    this.search = tag;
   }
 }

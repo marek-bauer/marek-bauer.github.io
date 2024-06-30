@@ -1,0 +1,15 @@
+<h1>Micro blog</h1>
+<search-bar [(search)]="search"></search-bar>
+<div class="articles">
+  @for (article of articles; track article;) {
+    <list-position 
+      [title]="article.title" 
+      [abstract]="article.abstract"
+      [publicationDate]="article.publicationDate"
+      [tags]="article.tags"
+      [hidden]="!shownArticles.has(article.key)"
+      (click)="navigateTo(article.key)"
+      (tagClick)="selectedTag($event)">
+    </list-position>
+  }
+</div>

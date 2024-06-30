@@ -17,5 +17,6 @@ export class AppComponent {
     {link: '/home', name: 'Home'},
     {link: '/cv', name: 'Cv'},
     {link: '/skills', name: 'Skills'},
+    {link: '/blog', name: 'Micro blog'},
   ]
 }

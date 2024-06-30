@@ -1,0 +1,23 @@
+<div [ngClass]="[hidden ? 'hidden' : 'shown', 'article']">
+  <div class="articleBody" (click)="clicked($event)">
+    <h3>{{ title }}</h3>
+    <p>{{ abstract }}</p>
+    <mat-chip-set class="tags" aria-label="Tags">
+      @for (tag of tags; track tag) {
+        <mat-chip (click)="clickedTag($event, tag)">{{tag}}</mat-chip>
+      }
+    </mat-chip-set>
+    <div class="extras">
+      <span>
+        <span class="extra">
+          <mat-icon>calendar_month</mat-icon>
+          {{ printDate(publicationDate) }}
+        </span>
+        <span class="extra">
+          <mat-icon>comment</mat-icon>
+          ???
+        </span>
+      </span>
+    </div>
+  </div>
+</div>
