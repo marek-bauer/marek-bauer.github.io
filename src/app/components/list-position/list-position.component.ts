@@ -16,11 +16,10 @@ export class ListPositionComponent {
   @Input() tags!: Array<string>;
   @Input() publicationDate!: Date;
   @Input() hidden: boolean = false;
+  @Input() comments?: number | undefined;
 
   @Output() tagClick = new EventEmitter<string>();
   @Output() click = new EventEmitter<void>();
-
-  @Input() comments?: number | undefined;
 
   clicked(ev: Event): void {
     ev.preventDefault();

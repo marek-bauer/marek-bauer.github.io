@@ -40,8 +40,9 @@ export class CommentsService {
 
   private async fetchCommentCount(key: string): Promise<number> {
     const coll = collection(this.firestore, this.fireKey(key));
-    return getCountFromServer(coll)
-      .then(snapshot => snapshot.data().count);
+    const snapshot = await getCountFromServer(coll);
+
+    return snapshot.data().count;
   }
 
   public async getComments(key: string): Promise<Array<Comment>> {
@@ -50,6 +51,14 @@ export class CommentsService {
 
   public async countComments (key: string): Promise<number> {
     return this.fetchCommentCount(key);
+  }
+
+  public async countAllComments (keys: Array<string>): Promise<{ [key: string]: number }> {
+    let result: { [key: string]: number } = {};
+    for (let key of keys) {
+      result[key] = await this.countComments(key);
+    }
+    return result;
   }
 
   private docToComment(doc: QueryDocumentSnapshot<DocumentData, DocumentData>): Comment | null {

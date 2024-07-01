@@ -3,6 +3,7 @@ import { articleList, Article } from '../articles/articles-list';
 import { Router } from '@angular/router';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { ListPositionComponent } from "../../components/list-position/list-position.component"
+import { CommentsService } from '../../services/comments/comments.service';
 
 import Fuse from 'fuse.js';
 
@@ -63,7 +64,15 @@ export class BlogComponent {
 
   private _fuze: Fuse<ArticleSearchData> = new Fuse(articleSearchData, fuseOptions);
 
-  constructor (private _router: Router) { }
+  constructor (
+    private _router: Router,
+    private _comments: CommentsService
+  ) { }
+
+  async ngOnInit() {
+    const commentCount = await this._comments.countAllComments(this.articles.map(x => x.key));
+    this.articles = this.articles.map(x => ({...x, comments: commentCount[x.key]}))
+  }
 
   navigateTo(articleKey: string): void {
     this._router.navigateByUrl('blog/' + articleKey);

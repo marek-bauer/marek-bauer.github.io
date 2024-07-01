@@ -6,18 +6,18 @@
       @for (tag of tags; track tag) {
         <mat-chip (click)="clickedTag($event, tag)">{{tag}}</mat-chip>
       }
-    </mat-chip-set>
-    <div class="extras">
-      <span>
+      <div class="extras">
         <span class="extra">
           <mat-icon>calendar_month</mat-icon>
           {{ printDate(publicationDate) }}
         </span>
-        <span class="extra">
-          <mat-icon>comment</mat-icon>
-          ???
-        </span>
-      </span>
-    </div>
+        @if(comments !== undefined) {
+          <span class="extra">
+            <mat-icon>comment</mat-icon>
+            {{ comments }}
+          </span>
+        }
+      </div>
+    </mat-chip-set>
   </div>
 </div>

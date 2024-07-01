@@ -8,6 +8,7 @@
       [publicationDate]="article.publicationDate"
       [tags]="article.tags"
       [hidden]="!shownArticles.has(article.key)"
+      [comments]="article.comments"
       (click)="navigateTo(article.key)"
       (tagClick)="selectedTag($event)">
     </list-position>
