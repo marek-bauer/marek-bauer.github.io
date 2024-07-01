@@ -1,8 +1,7 @@
 import { Component, Directive, Input, ContentChildren, QueryList, TemplateRef} from '@angular/core';
-import { CommonModule, NgTemplateOutlet, NgFor } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { SkillComponent } from './skill/skill.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { MatChipsModule } from '@angular/material/chips';
 import Fuse from 'fuse.js';
 
 @Directive({
@@ -44,7 +43,7 @@ const fuseOptions = {
 @Component({
   selector: 'search-skills',
   standalone: true,
-  imports: [CommonModule, NgFor, NgTemplateOutlet, SkillComponent, Category, SearchBarComponent, MatChipsModule],
+  imports: [CommonModule, NgTemplateOutlet, SkillComponent, Category, SearchBarComponent],
   templateUrl: './search-skills.component.html',
   styleUrl: './search-skills.component.scss'
 })
@@ -53,10 +52,28 @@ export class SearchSkillsComponent {
   suggestions: Array<{name: string, aliases: Array<string>}> = [];
   shownSkills: Set<string> = new Set();
 
-  search: string = "";
-
   private _fuze: Fuse<{ name: string, aliases: string[], tags: string[] }> | undefined;
   private _allSkills: Array<string> = [];
+
+  private _search: string = "";
+
+  set search(newSearch: string) {
+    this._search = newSearch;
+    if (newSearch == '') {
+      this.shownSkills = new Set(this._allSkills);
+    } else {
+      const results = this._fuze?.search(newSearch);
+      if (results != undefined) {
+        this.shownSkills = new Set(results.map(r => r.item.name));
+      } else {
+        this.shownSkills = new Set(this._allSkills);
+      }
+    }
+  }
+
+  get search(): string {
+    return this._search;
+  }
 
   ngAfterContentInit() {
     const tags = this.categories.toArray().flatMap(c => c.skills.toArray().flatMap(s => s.tags));
@@ -69,19 +86,6 @@ export class SearchSkillsComponent {
     this._allSkills = skills.map(s => s.name);
     this.shownSkills = new Set(this._allSkills);
     this._fuze = new Fuse(skillFuze, fuseOptions);
-  }
-
-  onSearch(filter: string) {
-    if (filter == '') {
-      this.shownSkills = new Set(this._allSkills);
-    } else {
-      const results = this._fuze?.search(filter);
-      if (results != undefined) {
-        this.shownSkills = new Set(results.map(r => r.item.name));
-      } else {
-        this.shownSkills = new Set(this._allSkills);
-      }
-    }
   }
 
   selectedTag(tag: string):void {

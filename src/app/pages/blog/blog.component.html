@@ -1,5 +1,5 @@
 <h1>Micro blog</h1>
-<search-bar [(search)]="search"></search-bar>
+<search-bar [(search)]="search" [suggestions]="suggestions"></search-bar>
 <div class="articles">
   @for (article of articles; track article;) {
     <list-position 

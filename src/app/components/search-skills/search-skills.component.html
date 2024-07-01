@@ -1,4 +1,4 @@
-<search-bar [suggestions]="suggestions" [(search)]="search" (searchChange)="onSearch($event)"></search-bar>
+<search-bar [suggestions]="suggestions" [(search)]="search"></search-bar>
 @for (c of categories; track c; let i = $index;) {
   <div [class]="['category', c.opened ? 'catOpened' : 'catClosed'].join(' ')">
     <div class="header" (click)="c.opened = !c.opened">
@@ -8,18 +8,16 @@
     <div class="categoryContent">
       <div>
         @for (s of c.skills; track s;) {
-            <div app-skill [name]="s.name" 
-                           [level]="c.skillLevelFn(s.lvl)"
-                           [percent]="s.lvl"
-                           [hidden]="!shownSkills.has(s.name)"
-                           [noContent]="s.noContent">
-              <ng-template [ngTemplateOutlet]="s.templateRef"></ng-template>
-              <mat-chip-set class="tags" aria-label="Tags">
-                @for (tag of s.tags; track tag) {
-                  <mat-chip (click)="selectedTag(tag)">{{tag}}</mat-chip>
-                }
-              </mat-chip-set>
-            </div>
+          <div app-skill 
+              [name]="s.name" 
+              [level]="c.skillLevelFn(s.lvl)"
+              [percent]="s.lvl"
+              [hidden]="!shownSkills.has(s.name)"
+              [noContent]="s.noContent"
+              [tags]="s.tags"
+              (tagClicked)="selectedTag($event)">
+            <ng-template [ngTemplateOutlet]="s.templateRef"></ng-template>
+          </div>
         }
       </div>
     </div>

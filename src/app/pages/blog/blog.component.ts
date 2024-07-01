@@ -45,6 +45,10 @@ const fuseOptions = {
 export class BlogComponent {
   articles: Array<ArticleHeader> = articleList;
   shownArticles: Set<string> = new Set(articleList.map(x => x.key));
+  suggestions: Array<{name: string, aliases: Array<string>}> 
+    = [ ...articleList.map(x => ({name: x.title, aliases: []}))
+      , ...articleList.flatMap(x => x.tags.map(t => ({name: t, aliases: []})))
+      ];
 
   private _search: string = "";
 
