@@ -21,11 +21,15 @@
     translateX(calc(0px - ($event-icon-size / 2) - $timeline-pos - ($timeline-width * 2)))
 }
 
-.icon mat-icon, .icon div {
+.icon > * {
   font-size: calc($event-icon-size * 0.8);
   width: calc($event-icon-size * 0.8);
   height: calc($event-icon-size * 0.8);
-  margin: calc($event-icon-size * 0.1) calc($event-icon-size * 0.1);
+  margin: calc($event-icon-size * 0.1);
+}
+
+.icon fa-icon {
+ display: inline-flex;
 }
 
 .icon div {

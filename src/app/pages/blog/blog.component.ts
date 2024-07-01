@@ -6,6 +6,7 @@ import { ListPositionComponent } from "../../components/list-position/list-posit
 import { CommentsService } from '../../services/comments/comments.service';
 
 import Fuse from 'fuse.js';
+import { TypingTextComponent } from '../../components/typing-text/typing-text.component';
 
 type ArticleHeader = 
   { comments?: number
@@ -38,7 +39,7 @@ const fuseOptions = {
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [SearchBarComponent, ListPositionComponent, ListPositionComponent],
+  imports: [SearchBarComponent, ListPositionComponent, ListPositionComponent, TypingTextComponent],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.scss'
 })

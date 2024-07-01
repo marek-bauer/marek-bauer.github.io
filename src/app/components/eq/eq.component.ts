@@ -11,7 +11,6 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
   styleUrl: './eq.component.scss'
 })
 export class EqComponent {
-  //  @Input() block: boolean = false;
   @Input() equation!: string;
 
   private _block: boolean = false;

@@ -1,5 +1,5 @@
 import { Component, ContentChildren, Directive, QueryList, Input, TemplateRef } from '@angular/core';
-import { EventComponent, ImgIcon, MatIcon } from './event/event.component';
+import { EventComponent, ImgIcon, MatIcon, AweIcon } from './event/event.component';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
 
 function readDate(a: string): Date | 'Now' {
@@ -10,11 +10,15 @@ function readDate(a: string): Date | 'Now' {
   }
 }
 
-function readIcon(a: string): MatIcon | ImgIcon {
+function readIcon(a: string): MatIcon | ImgIcon | AweIcon {
   if (a.startsWith('mat:')) {
     return new MatIcon(a.substring(4));
   } else if (a.startsWith('img:')) {
     return new ImgIcon(a.substring(4));
+  } else if (a.startsWith('fab:')) {
+    return new AweIcon("fab", a.substring(4));
+  } else if (a.startsWith('fas:')) {
+    return new AweIcon("fas", a.substring(4));
   } else {
     throw "Wrong icon type " + a
   }

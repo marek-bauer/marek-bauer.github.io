@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Component, Input, NgZone, Inject } from '@angular/core';
 
 @Component({
@@ -10,21 +11,31 @@ import { Component, Input, NgZone, Inject } from '@angular/core';
 export class TypingTextComponent {
   @Input() text!: string;
   @Input() cursor: string = '_';
-  @Input() typingSpeedMs: number = 300;
+  @Input() typingSpeedMs: number = 200;
   @Input() coursorBlinkingMs: number = 500;
-
-  constructor(@Inject(NgZone) ngZone:NgZone){
-    this.ngZone = ngZone
+  
+  @Input() set typed(input: BooleanInput) {
+    this._typed = coerceBooleanProperty(input);
+    if (this._typed) {
+      this.writtenText = this.text;
+      this.position = this.text.length;
+    }
   }
 
+  get typed() {
+    return this._typed;
+  }
+
+  constructor(@Inject(NgZone) private _ngZone: NgZone) { }
+  
   cursorShown: boolean = true;
-  writtenText: string = ""
-  private ngZone: NgZone;
+  writtenText: string = "";
+  private _typed: boolean = false;
   private position: number = 0;
 
   private typingEffect = () => {
     if (this.position < this.text.length) {
-      this.ngZone.run(() => {
+      this._ngZone.run(() => {
           this.position += 1;
           this.writtenText = this.text.substring(0, this.position);
       });
@@ -35,14 +46,14 @@ export class TypingTextComponent {
   }
 
   private blinkCursor = () => {
-    this.ngZone.run(() => {
+    this._ngZone.run(() => {
       this.cursorShown = !this.cursorShown;
     });
     setTimeout(this.blinkCursor, this.coursorBlinkingMs);
   }
 
   ngAfterViewInit(): void {
-    this.ngZone.runOutsideAngular(() => {
+    this._ngZone.runOutsideAngular(() => {
       setTimeout(this.typingEffect, this.typingSpeedMs);
     })
   }
