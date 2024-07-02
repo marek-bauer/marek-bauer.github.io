@@ -52,9 +52,10 @@
   font-weight: 400;
   font-style: normal;
   font-size: 12pt;
-  margin-top: -6px;
+  margin-top: -3px;
   margin-right: 38px;
   color: $secondary-color;
+  transition: color .2s;
 }
 
 .header {
@@ -63,6 +64,10 @@
 
 .event:hover .icon {
   background-color: $timeline-highlight;
+}
+
+.event:hover .date {
+  color: $timeline-highlight;
 }
 
 .event:hover {
