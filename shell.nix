@@ -6,5 +6,6 @@ stdenv.mkDerivation rec {
     nodejs_18
     yarn
     nodePackages."@angular/cli"
+    git
   ];
 }
