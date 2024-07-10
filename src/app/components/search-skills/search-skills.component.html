@@ -2,7 +2,7 @@
 @for (c of categories; track c; let i = $index;) {
   <div [class]="['category', c.opened ? 'catOpened' : 'catClosed'].join(' ')">
     <div class="header" (click)="c.opened = !c.opened">
-      <div class="categoryName"><span>{{i + 1}}.</span> {{c.name}}</div>
+      <div class="categoryName"><span>{{i + 1}}.</span> {{c.knowledge}}</div>
       <div class="categoryArrow"><div></div></div>
     </div>
     <div class="categoryContent">

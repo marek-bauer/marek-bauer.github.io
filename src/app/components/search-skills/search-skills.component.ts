@@ -3,6 +3,7 @@ import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { SkillComponent } from './skill/skill.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import Fuse from 'fuse.js';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Directive({
   selector: '[skill]',
@@ -13,7 +14,15 @@ export class Skill{
   @Input() lvl!: number;
   @Input() aliases: Array<string> = [];
   @Input() tags: Array<string> = [];
-  @Input() noContent: boolean = false;
+
+  private _noContent: boolean = false;
+  @Input() set noContent (x: BooleanInput) {
+    this._noContent = coerceBooleanProperty(x);
+  };
+
+  get noContent(): boolean {
+    return this._noContent;
+  }
 
   constructor(public templateRef: TemplateRef<any>) {}
 }
@@ -25,14 +34,14 @@ export class Skill{
   imports: [CommonModule]
 })
 export class Category{
-  @Input({required: true}) name!: string;
+  @Input({required: true}) knowledge!: string;
   @Input({required: true}) skillLevelFn!: (x: number) => string;
   @Input({required: false}) opened: boolean = true;
   @ContentChildren(Skill) skills!: QueryList<Skill>;
 }
 
 const fuseOptions = {
-	threshold: 0.5,
+	threshold: 0.35,
 	keys: [
 		"name",
 		"aliases",
