@@ -34,7 +34,7 @@ export class Skill{
   imports: [CommonModule]
 })
 export class Category{
-  @Input({required: true}) knowledge!: string;
+  @Input({required: true}) title!: string;
   @Input({required: true}) skillLevelFn!: (x: number) => string;
   @Input({required: false}) opened: boolean = true;
   @ContentChildren(Skill) skills!: QueryList<Skill>;

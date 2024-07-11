@@ -1,9 +1,9 @@
 <h1 typing-text text="Skills" typed></h1>
 <search-skills>
-  <category knowledge="Programming languages" [skillLevelFn]="technicalSkill">
+  <category title="Programming Languages" [skillLevelFn]="technicalSkill">
     <ng-template skill name="Haskell" [lvl]="80" 
-      [tags]="[ 'Academic experience', 'Professional experience', 'Functional', 
-                'Declarative', 'Full-stack', 'Reliable systems']">
+      [tags]="[ 'Academic Experience', 'Professional Experience', 'Functional', 
+                'Declarative', 'Full-stack', 'Reliable Systems']">
       <p>
         Haskell is one of my favorite programming languages. I was introduced
         to it during my studies, but my real adventure with Haskell began when I
@@ -13,8 +13,9 @@
         available in Mu.
       </p>
     </ng-template>
+
     <ng-template skill name="Java" [lvl]="75" 
-      [tags]="[ 'Academic experience', 'Professional experience', 'Imperative', 
+      [tags]="[ 'Academic Experience', 'Professional Experience', 'Imperative', 
                 'OOP', 'Object-oriented', 'Full-stack', 'Android', 'Maven', 
                 'Hibernate', 'Spring' ]">
       <p>
@@ -24,8 +25,9 @@
         language's features and challenges, at least up to its 8th version.
       </p>
     </ng-template>
+
     <ng-template skill name="Python" [lvl]="65"
-      [tags]="[ 'Academic experience', 'Professional experience', 'Imperative', 
+      [tags]="[ 'Academic Experience', 'Professional Experience', 'Imperative', 
                 'Numpy', 'Machine learning']">
       <p>
         Python is my go-to scripting language for both personal and professional
@@ -33,8 +35,9 @@
         basics machine learning projects. 
       </p>
     </ng-template>
+
     <ng-template skill name="Rust" [lvl]="65"
-      [tags]="[ 'Academic experience', 'Imperative', 'Low level', 'Embedded', 
+      [tags]="[ 'Academic Experience', 'Imperative', 'Low-level', 'Embedded', 
                 'WebAssembly']">
       <p>
         Rust is one of my favorite programming languages due to its innovative
@@ -44,8 +47,9 @@
         my studies.
       </p>
     </ng-template>
+
     <ng-template skill name="TypeScript" [lvl]="60"
-      [tags]="[ 'Academic experience', 'Professional experience', 'Imperative', 
+      [tags]="[ 'Academic Experience', 'Professional Experience', 'Imperative', 
                 'Angular', 'Frontend', 'Ionic', 'AJAX']"
       [aliases]="['TS']">
       <p>
@@ -55,16 +59,20 @@
         simplified my workflow.
       </p>
     </ng-template>
+
     <ng-template skill name="COQ" [lvl]="55"
-      [tags]="['Formal methods', 'Reliable systems', 'Dependent types', 'Type theory']">
+      [tags]="[ 'Academic Experience', 'Formal Methods', 'Reliable Systems', 
+                'Dependent types', 'Type Theory', 'Functional', 
+                'Declarative']">
       <p>
         COQ is a proof assistant based on type theory, which I explored in my
         master's thesis. With COQ, I can prove properties of algorithms and
         inductive types, although I find co-inductive types more challenging.
       </p>
     </ng-template>
+
     <ng-template skill name="JavaScript" [lvl]="50"
-      [tags]="['Academic experience', 'JQuery', 'AJAX', 'Frontend']"
+      [tags]="['Academic Experience', 'JQuery', 'AJAX', 'Frontend']"
       [aliases]="['ECMAScript']">
       <p>
         JavaScript and I have a unique relationship. I'm captivated by its
@@ -75,16 +83,18 @@
         11?).
       </p>
     </ng-template>
+
     <ng-template skill name="PureScript" [lvl]="45"
-      [tags]="[ 'Professional experience', 'AJAX', 'Frontend', 'Functional', 'Declarative', 
-                'Reliable systems']">
+      [tags]="[ 'Professional Experience', 'AJAX', 'Frontend', 'Functional', 
+                'Declarative', 'Reliable Systems']">
       <p>
         Haskell for web applications. I developed this skill during my time at
         Stranded Charted Bank.
       </p>
     </ng-template>
+
     <ng-template skill name="Kotlin" [lvl]="45" 
-      [tags]="[ 'Academic experience', 'Professional experience', 'Java-like', 
+      [tags]="[ 'Academic Experience', 'Professional Experience', 'Java-like', 
                 'Android', 'Imperative']"
     [aliases]="['Java']">
       <p>
@@ -93,15 +103,18 @@
         applications course.
       </p>
     </ng-template>
+
     <ng-template skill name="PHP" [lvl]="40"
-      [tags]="['Academic experience', 'Backend', 'Symphony']">
+      [tags]="['Academic Experience', 'Backend', 'Symphony']">
       <p>
         I started learning this language in high school and have since developed
         several projects using it.
       </p>
     </ng-template>
+
     <ng-template skill name="C / C++" [lvl]="40"
-      [tags]="['Academic experience', 'Imperative', 'Embedded', 'Arduino']"
+      [tags]="[ 'Academic Experience', 'Imperative', 'Embedded', 'Arduino', 
+                'Low-level' ]"
       [aliases]="['Cpp']">
       <p>
         My journey into programming began with this language. I've utilized it
@@ -109,43 +122,49 @@
         coding a snake game for Arduino.
       </p>
     </ng-template>
+
     <ng-template skill name="Prolog" [lvl]="35"
-      [tags]="['Academic experience', 'Logic', 'Reliable systems']">
+      [tags]="['Academic Experience', 'Logic', 'Reliable Systems']">
       <p>
         I have some experience with Prolog, which I gained during a logic
         programming course I completed during my studies. 
       </p>
     </ng-template>
+
     <ng-template skill name="Go" [lvl]="25"
-      [tags]="['Academic experience', 'Concurrency', 'Backend']">
+      [tags]="['Academic Experience', 'Concurrency', 'Backend']">
       <p>
         A programming languages utilizing microthreads and message queues. I
         learned it through academic coursework.
       </p>
     </ng-template>
+
     <ng-template skill name="Julia" [lvl]="20"
-      [tags]="['Academic experience', 'Imperative']">
+      [tags]="['Academic Experience', 'Imperative']">
       <p>
         I learned this Python-like language with static types while studying
         numerical methods.
       </p>
     </ng-template>
+
     <ng-template skill name="Ada" [lvl]="15"
-      [tags]="['Academic experience', 'Imperative', 'Reliable systems']">
+      [tags]="['Academic Experience', 'Imperative', 'Reliable Systems']">
       <p>
         I acquired foundational knowledge of this language during my academic studies.
       </p>
     </ng-template>
+
     <ng-template skill name="Lean" [lvl]="15"
-      [tags]="['Academic experience', 'Formal methods', 'Reliable systems', 'Type theory']">
+      [tags]="['Academic Experience', 'Formal Methods', 'Reliable Systems', 'Type Theory']">
       <p>
         Lean is a proof assistant specializing in classic logic and quotient
         types. I acquired proficiency in this language while writing my master's
         thesis.
       </p>
     </ng-template>
+
     <ng-template skill name="Twelf" [lvl]="5"
-      [tags]="['Academic experience', 'Logic', 'Reliable systems', 'Dependent types']">
+      [tags]="['Academic Experience', 'Logic', 'Reliable Systems', 'Dependent types']">
       <p>
         Interesting mix of Prolog and statically typed language with dependent
         types.
@@ -153,27 +172,70 @@
     </ng-template>
   </category>
 
-  <category knowledge="IT domains" [skillLevelFn]="technicalSkill">
-
+  <category title="IT Domains" [skillLevelFn]="technicalSkill">
+    <ng-template skill name="Backend Development" [lvl]="80"></ng-template>
+    <ng-template skill name="Databases Management" [lvl]="75"></ng-template>
+    <ng-template skill name="Web Development" [lvl]="70"></ng-template>
+    <ng-template skill name="Quality Assurance and Testing" [lvl]="65"></ng-template>
+    <ng-template skill name="Graphical Interfaces" [lvl]="55"></ng-template>
+    <ng-template skill name="Mobile Applications" [lvl]="50"></ng-template>
+    <ng-template skill name="Networking" [lvl]="30"></ng-template>
+    <ng-template skill name="Machine Learning" [lvl]="25"></ng-template>
+    <ng-template skill name="Cybersecurity" [lvl]="20"></ng-template>
+    <ng-template skill name="Data Analytics" [lvl]="15"></ng-template>
   </category>
 
-  <category knowledge="Dev-ops tools" [skillLevelFn]="technicalSkill">
-
+  <category title="DevOps Tools" [skillLevelFn]="technicalSkill">
+    <ng-template skill name="Git" [lvl]="70"></ng-template>
+    <ng-template skill name="Jenkins" [lvl]="35"></ng-template>
+    <ng-template skill name="Gitlab Actions" [lvl]="35"></ng-template>
+    <ng-template skill name="Svn" [lvl]="30"></ng-template>
+    <ng-template skill name="Docker" [lvl]="20"></ng-template>
   </category>
 
-  <category knowledge="Domain knowledge" [skillLevelFn]="technicalSkill">
-
+  <category title="Domain Knowledge" [skillLevelFn]="technicalSkill">
+    <ng-template skill name="Finance" [lvl]="60"
+      [tags]="['Academic Experience', 'Professional Experience', 'Markets', 'Options valuations', 
+               'Black-Scholes model']">
+      <p>
+        Although I don't have a formal education in finance, I've always been
+        fascinated by financial markets, particularly stock market crashes. I
+        completed the Quant Scholarship program by Credit Suisse, where I
+        learned the basics of the Black-Scholes model and option valuation.
+        After joining Standard Chartered Bank, I continued to intensively study
+        hedging and other financial concepts.
+      </p>
+    </ng-template>
+    <ng-template skill name="Shipments and Logistics" [lvl]="40"
+    [tags]="['Professional Experience', 'Logistic centers']">
+      <p>
+        During my tenure at Siemens, I played a key role in developing software
+        solutions for managing logistic centers. I also crafted comprehensive
+        testing scenarios for automated package sorting systems, ensuring seamless
+        and efficient operations.
+      </p>
+    </ng-template>
   </category>
 
-  <category knowledge="Languages" [skillLevelFn]="languageSkillLevel">
+  <category title="Languages" [skillLevelFn]="languageSkillLevel">
     <ng-template skill name="Polish" [lvl]="100" 
-      [tags]="['Academic experience', 'Professional experience']">
+      [tags]="['Academic Experience', 'Professional Experience']">
     </ng-template>
     <ng-template skill name="English" [lvl]="80" 
-      [tags]="['Academic experience', 'Professional experience']">
+      [tags]="['Academic Experience', 'Professional Experience']"
+      [aliases]="['American']">
+      <p>
+        I've been using English extensively since I began my programming career.
+        With a diverse team, most of our meetings are conducted in English,
+        making it a language I use daily.
+      </p>
     </ng-template>
     <ng-template skill name="German" [lvl]="10"  
-      [tags]="['Academic experience']">
+      [tags]="['Academic Experience']">
+      <p>
+        I studied the basics of German in high school, but despite my German
+        surname, I never became fluent.
+      </p>
     </ng-template>
   </category>
 </search-skills>
