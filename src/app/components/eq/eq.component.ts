@@ -11,7 +11,7 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
   styleUrl: './eq.component.scss'
 })
 export class EqComponent {
-  @Input() equation!: string;
+  @Input() equation!: string | Array<String>;
 
   private _block: boolean = false;
 
@@ -19,7 +19,7 @@ export class EqComponent {
     this._block = coerceBooleanProperty(input);
   }
 
-  get block() {
+  get block(): boolean {
     return this._block;
   }
 
@@ -32,7 +32,15 @@ export class EqComponent {
   constructor(private domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    const equationHTML = this.renderToString(this.equation);
+    let equationHTML: string;
+    if (this.equation instanceof Array) {
+      equationHTML = this.renderToString(
+        "\\begin{align}" + this.equation.map(l => l + "\\\\").join('') + "\\end{align}",
+        {displayMode: true}
+      );
+    } else {
+      equationHTML = this.renderToString(this.equation, {displayMode: this.block});
+    }
     this.html = this.domSanitizer.bypassSecurityTrustHtml(equationHTML);
   }
 
