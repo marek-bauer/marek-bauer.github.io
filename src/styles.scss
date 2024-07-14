@@ -58,7 +58,7 @@ h2 {
 }
 
 h3 {
-  font-size: 26pt;
+  font-size: 24pt;
 }
 
 html {
@@ -137,4 +137,51 @@ div:hover > .arrow > div {
 .tags mat-chip {
   background-color: $tag-color!important;
   cursor: pointer;
+}
+
+.frame {
+  background: $background-variant;
+  padding: 20px 10px 10px 10px;
+  border: 4px solid $secondary-color;
+  position: relative;
+}
+
+.frame::after {
+  content: attr(frame-name);
+  color: $background-variant;
+  background: $secondary-color;
+  padding: 4px 8px;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  font-size: 18px;
+  margin-top: -17px;
+  margin-left: 13px;
+}
+
+.frame .katex-display:last-child {
+  margin-bottom: 0;
+}
+
+.article {
+  a {
+    color: $primary-color;
+  }
+
+  h2, h3 {
+    margin-top: 22px;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  p {
+    inline-size: none;
+  }
+
+  p eq {
+    display: inline-block;
+    height: 1px;
+  }
 }

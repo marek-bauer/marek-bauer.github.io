@@ -3,5 +3,11 @@
 p {
   color: $primary-color;
   font-family: $date-font;
-  margin: 0;
+  font-size: 22px;
+  margin-top: 6px;
+  margin-bottom: 22px;
+}
+
+.tags span {
+  cursor: auto;
 }
