@@ -1,0 +1,102 @@
+
+<h3>Introduction</h3>
+<p>
+  If you are like me, you must have wondered about the question in the title.
+  As it happens, this particular question leads us down the rabbit hole of
+  information theory. But before we lose sight of today's topic, let's define
+  entropy:
+</p>
+
+<div class="frame" frame-name="Definition">
+  <strong>Entropy</strong> is the expected (average) level of information.
+  <eq block equation="H(X) = \sum_{x \in X}-p(x)\log(p(x))"></eq>
+</div>
+
+<p>
+  I hope the concept of <a href='https://en.wikipedia.org/wiki/Expected_value'>expected value</a> 
+  is familiar to you. If not, you can think of it as a probability-weighted average.
+  When we strip this formula of its averaging part, we get a new formula for the amount 
+  of information:
+</p>
+
+<eq block equation="I(x) = -\log(p(x)) = \log(\frac{1}{p(x)})"></eq>
+
+<h3>Defining information measurement function</h3>
+<p>
+  As we can see, the logarithm is an integral part of this formula. But we still don't
+  know why. Let's try to state what properties a function measuring information should have.
+</p>
+
+<ol>
+  <li>
+    <strong>The less likely the event, the more informative it is</strong> - We can all agree that a
+    message saying your car broke down is far more informative than a message saying it
+    is working (since we all expected that):
+    <eq equation="p(x) < p(y) \Rightarrow I(x) > I(y)"></eq>
+  </li>
+  <li>
+    <strong>Certain events give no information</strong> - Statements like "1 + 1 = 2" provide no new
+    information:
+    <eq equation="p(x) = 1 \Rightarrow I(x) = 0"></eq>
+  </li>
+  <li>
+    <strong>Information of independent events is additive</strong> - For two independent events
+    <eq equation="x"></eq> and <eq equation="y"></eq>:
+    <eq equation="I((x, y)) = I(x) + I(y)"></eq>
+  </li>
+</ol>
+
+<p>
+  Having these three properties, we need tqo find a function that satisfies them.
+  From the first property, we know that <eq equation="I(x)"></eq> depends on the probability
+  of the event, so we can write it as <eq equation="I(x) = f(p(x))"></eq>. The other two 
+  properties help us define <eq equation="f(p(x))"></eq>. The second property states that
+  <eq equation="f(1) = 0"></eq>, and the third one states that <eq equation="f(xy) = f(x) + f(y)"></eq>.
+</p>
+
+<p>
+  We know that <eq equation="f(x) = C\log(x)"></eq> satisfies these properties.
+  If we want this function to be continuous, the logarithm is the only solution.
+  To satisfy the first property, <eq equation="C"></eq> needs to be negative.
+  From basic algebra, we also know that:
+</p>
+
+<eq block equation="-D\log(x) = D\log(\frac{1}{x}) = \log_{\log(D)}(\frac{1}{x})"></eq>
+
+<p>
+  Thus, the logarithm base is arbitrary. We can think of this base as our basic
+  unit of information. Usually, bits are used as the unit of information;
+  therefore, the logarithm of base 2 is often used.
+</p>
+
+<div class="frame" frame-name="Note">
+  The second property can be derived from the third one:
+  <eq block [equation]="[ 'f(x) &= f(x)'
+                        , 'f(1x) &= f(x)'
+                        , 'f(1) + f(x) &= f(x)'
+                        , 'f(1) &= 0']"></eq>
+</div>
+
+<h3>What Information Really Is</h3>
+
+<p>
+  Let's take a few steps back and think about our newly defined function 
+  <eq equation="I(x)"></eq>. I told you this is a measurement of "information,"
+  without delving deeply into what information actually is. Unfortunately, this
+  question is an entire <a href="https://plato.stanford.edu/entries/information/">
+  branch of philosophy</a>, and I am not a very good philosopher. Fortunately,
+  we have a nice interpretation of this concept, which is, surprise, a
+  measurement of surprise. If we think about it, our requirements fit perfectly
+  for measuring surprise. From a philosophical point of view, it also makes
+  sense. Someone who knows everything can never be surprised since they already
+  possess all the information.
+</p>
+
+<p>
+  The last question about entropy is why should we care, is this concept useful?
+  As it turns out entropy is a lower bound for effective encoding of
+  information, that means we cannot send a massages using on average less bits
+  that entropy (average information / surprise) of those messages. This theorem
+  is called <a href="https://en.wikipedia.org/wiki/Shannon%27s_source_coding_theorem">
+  Shannon coding theorem</a>. But it is topic for another post.
+</p>

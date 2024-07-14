@@ -1,5 +1,5 @@
 import { Component, Type } from '@angular/core';
-import { TestComponent } from './test/test.component';
+import { EntropyComponent } from './entropy/entropy.component';
 import { ArticleComponent } from '../../components/article/article.component';
 import { Route } from '@angular/router';
 
@@ -13,26 +13,12 @@ export type Article =
   }
 
 export const articleList: Array<Article> = 
-  [ { key: "test"
-    , title: "This is a Test"
-    , publicationDate: new Date()
-    , component: TestComponent 
-    , abstract: "Tis is abstract of a test"
-    , tags: ["Marek", "Bauer"]
-    }
-  , { key: "test1"
-    , title: "Tra lala lala"
-    , publicationDate: new Date()
-    , component: TestComponent 
-    , abstract: "Tis is abstract of a tratats"
-    , tags: ["Istanbul", "Vienna", "London", "Warsaw", "Moscow", "Tokyo", "New  York"]
-    }
-  , { key: "test2"
-    , title: "My life"
-    , publicationDate: new Date()
-    , component: TestComponent 
-    , abstract: "Tis is abstract of a test. dasd j djaslj lkdjaskljdl "
-    , tags: ["Life", "RR"]
+  [ { key: "what-logarithm-is-doing-in-the-entropy-formula"
+    , title: "What logarithm is doing in the entropy formula?"
+    , publicationDate: new Date('11 Jul 2024 17:00:00 GMT')
+    , component: EntropyComponent 
+    , abstract: "TODO"
+    , tags: ["Information theory", "Entropy", "Shannon theorem", "Fundamentals", "Encoding"]
     }
   ]
 
