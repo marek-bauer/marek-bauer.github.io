@@ -8,6 +8,6 @@ p {
   margin-bottom: 22px;
 }
 
-.tags span {
-  cursor: auto;
+mat-chip {
+  background-color: $tag-color!important;
 }

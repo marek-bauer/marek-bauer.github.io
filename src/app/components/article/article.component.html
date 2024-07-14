@@ -1,4 +1,11 @@
 <h1>{{ title }}</h1>
 <p>{{ publicationDate.toLocaleDateString("en-GB", dateOptions) }}</p>
-<ng-template [ngComponentOutlet]="articleContent"></ng-template>
+<div class="article">
+  <ng-template [ngComponentOutlet]="articleContent"></ng-template>
+</div>
+<mat-chip-set>
+  @for (tag of tags; track tag) {
+    <mat-chip>{{tag}}</mat-chip>
+  }
+</mat-chip-set>
 <comment-section [key]="key"></comment-section>

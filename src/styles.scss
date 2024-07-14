@@ -176,12 +176,10 @@ div:hover > .arrow > div {
     font-weight: bold;
   }
 
-  p {
-    inline-size: none;
-  }
-
   p eq {
     display: inline-block;
     height: 1px;
   }
+
+  line-height: 20px;
 }

@@ -26,6 +26,11 @@ export function articleToRoute(a: Article): Route {
   return {
     path: 'blog/' + a.key,
     component: ArticleComponent,
-    data: { key: a.key, title: a.title, publicationDate: a.publicationDate, articleContent: a.component }
+    data: { key: a.key
+          , title: a.title
+          , publicationDate: a.publicationDate
+          , articleContent: a.component
+          , tags: a.tags 
+          }
   }
 }
