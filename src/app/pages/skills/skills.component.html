@@ -186,11 +186,53 @@
   </category>
 
   <category title="DevOps Tools" [skillLevelFn]="technicalSkill">
-    <ng-template skill name="Git" [lvl]="70"></ng-template>
-    <ng-template skill name="Jenkins" [lvl]="35"></ng-template>
-    <ng-template skill name="Gitlab Actions" [lvl]="35"></ng-template>
-    <ng-template skill name="Svn" [lvl]="30"></ng-template>
-    <ng-template skill name="Docker" [lvl]="20"></ng-template>
+    <ng-template skill name="Git" [lvl]="70"
+      [tags]="['Academic Experience', 'Professional Experience', 'Source Control']">
+      <p>
+        At Standard Chartered Bank, I have utilized Git as my primary source
+        control tool. Given the large codebase, we relied exclusively on the
+        command-line interface (CLI), bypassing graphical tools. This experience
+        has made me proficient in committing, pushing, and rebasing using Git
+        CLI.
+      </p>
+    </ng-template>
+
+    <ng-template skill name="Jenkins" [lvl]="45"
+      [tags]="['Professional Experience', 'CI/CD']">
+      <p>
+        While not a Jenkins expert, I have hands-on experience in creating
+        Jenkins pipelines during my tenure at Siemens and Standard Chartered
+        Bank.
+      </p>
+    </ng-template>
+
+    <ng-template skill name="Svn" [lvl]="30"
+      [tags]="['Academic Experience', 'Professional Experience', 'Source Control']">
+      <p>
+        During my tenure at Siemens, I primarily utilized SVN for efficient
+        source control management.
+      </p>
+    </ng-template>
+
+    <ng-template skill name="Nix" [lvl]="25"
+      [tags]="['Dependency Resolver', 'NixOS']">
+      <p>
+        Nix is one of my favorite tools for dependency management.
+        Unfortunately, I don't have extensive experience with it yet, and I've
+        only created simple Nix environments. To enhance my skills, I've
+        recently started using NixOS under WSL for my projects.
+      </p>
+    </ng-template>
+    <ng-template skill name="Docker" [lvl]="20"
+      [tags]="['Professional Experience', 'CI/CD']"
+      [aliases]="['Podman']">
+      <p>
+        While my hands-on experience with Docker is still growing, I have
+        utilized Docker files for debugging purposes and have a solid grasp of
+        its basic semantics. I am eager to deepen my knowledge and skills in
+        creating Docker files from scratch.
+      </p>
+    </ng-template>
   </category>
 
   <category title="Domain Knowledge" [skillLevelFn]="technicalSkill">
