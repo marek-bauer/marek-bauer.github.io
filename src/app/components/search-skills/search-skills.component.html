@@ -1,6 +1,8 @@
-<search-bar [suggestions]="suggestions" [(search)]="search"></search-bar>
+<search-bar [suggestions]="suggestions" [(search)]="search" [maxSuggestions]="5"></search-bar>
 @for (c of categories; track c; let i = $index;) {
-  <div [class]="['category', c.opened ? 'catOpened' : 'catClosed'].join(' ')">
+  <div [class]="[ 'category'
+                , c.opened ? 'catOpened' : 'catClosed'
+                , nonEmptyCategories.has(c.title) ? 'nonEmpty' : 'empty'].join(' ')">
     <div class="header" (click)="c.opened = !c.opened">
       <div class="categoryName"><span>{{i + 1}}.</span> {{c.title}}</div>
       <div class="categoryArrow"><div></div></div>

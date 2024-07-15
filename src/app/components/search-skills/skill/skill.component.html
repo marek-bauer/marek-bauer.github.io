@@ -13,11 +13,13 @@
     <div class="drop-collapse" *ngIf="!noContent">
       <div>
         <ng-content></ng-content>
-        <mat-chip-set class="tags" aria-label="Tags">
-          @for (tag of tags; track tag) {
-            <mat-chip (click)="clickedTag($event, tag)">{{tag}}</mat-chip>
-          }
-        </mat-chip-set>
+        @if (tags != undefined && tags.length != 0) {
+          <mat-chip-set class="tags" aria-label="Tags">
+            @for (tag of tags; track tag) {
+              <mat-chip (click)="clickedTag($event, tag)">{{tag}}</mat-chip>
+            }
+          </mat-chip-set>
+        }
       </div>
     </div>
   </div>

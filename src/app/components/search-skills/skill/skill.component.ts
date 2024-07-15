@@ -16,7 +16,7 @@ export class SkillComponent {
   @Input() name!: string;
   @Input() level!: string;
   @Input() percent!: number;
-  @Input() tags!: Array<string>;
+  @Input() tags: Array<string> = [];
 
   @Output() tagClicked = new EventEmitter<string>();
 

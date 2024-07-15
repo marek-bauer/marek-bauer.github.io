@@ -60,9 +60,11 @@ export class SearchSkillsComponent {
   @ContentChildren(Category) categories!: QueryList<Category>;
   suggestions: Array<{name: string, aliases: Array<string>}> = [];
   shownSkills: Set<string> = new Set();
+  nonEmptyCategories: Set<string> = new Set();
 
-  private _fuze: Fuse<{ name: string, aliases: string[], tags: string[] }> | undefined;
+  private _fuze: Fuse<{ name: string, category: string, aliases: string[], tags: string[] }> | undefined;
   private _allSkills: Array<string> = [];
+  private _allCategories: Array<string> = [];
 
   private _search: string = "";
 
@@ -70,12 +72,15 @@ export class SearchSkillsComponent {
     this._search = newSearch;
     if (newSearch == '') {
       this.shownSkills = new Set(this._allSkills);
+      this.nonEmptyCategories = new Set(this._allCategories);
     } else {
       const results = this._fuze?.search(newSearch);
       if (results != undefined) {
         this.shownSkills = new Set(results.map(r => r.item.name));
+        this.nonEmptyCategories = new Set(results.map(r => r.item.category));
       } else {
         this.shownSkills = new Set(this._allSkills);
+        this.nonEmptyCategories = new Set(this._allCategories);
       }
     }
   }
@@ -84,14 +89,18 @@ export class SearchSkillsComponent {
     return this._search;
   }
 
-  ngAfterContentInit() {
-    const tags = this.categories.toArray().flatMap(c => c.skills.toArray().flatMap(s => s.tags));
+  ngAfterContentInit(): void {
+    const categories = this.categories.toArray();
+    const tags = categories.flatMap(c => c.skills.toArray().flatMap(s => s.tags));
     const uniqueTags = [...new Set(tags)];
-    const skills = this.categories.toArray().flatMap(c => c.skills.toArray())
+    const skills = categories.flatMap(c => c.skills.toArray())
     this.suggestions = [...skills.map(s => ({name: s.name, aliases: s.aliases})),  
                         ...uniqueTags.map(t => ({name: t, aliases: [t]}))];
 
-    const skillFuze = skills.map(s => ({name: s.name, aliases: s.aliases, tags: s.tags}));
+    const skillFuze = categories.flatMap(c =>
+      c.skills.toArray().map(s => ({name: s.name, category: c.title, aliases: s.aliases, tags: s.tags}))
+    );
+    this._allCategories = categories.map(s => s.title);
     this._allSkills = skills.map(s => s.name);
     this.shownSkills = new Set(this._allSkills);
     this._fuze = new Fuse(skillFuze, fuseOptions);
@@ -99,5 +108,9 @@ export class SearchSkillsComponent {
 
   selectedTag(tag: string):void {
     this.search = tag;
+  }
+
+  isCategoryHidden(cat: Category): boolean {
+    return false;
   }
 }

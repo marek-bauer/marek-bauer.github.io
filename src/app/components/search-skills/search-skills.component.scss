@@ -2,13 +2,11 @@
 
 .header {
   position: relative;
-  cursor: pointer;
 }
 
 .categoryName {
   font-family: $alt-font;
-  font-size: 36px;
-  margin-right: 44px;
+  transition: 0.6s;
 }
 
 .categoryName span {
@@ -32,6 +30,62 @@
   transform: rotate(0);
 }
 
+.categoryArrow div {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  transform: rotate(-45deg);
+  top: 10px;
+  left: 5px;
+  transition: .1s;
+}
+
+.empty {
+  .header {
+    cursor: auto;
+  }
+
+  .categoryName {
+    font-size: 26px;
+    margin-right: 44px;
+    margin-top: 4px;
+    color: $disabled-color;
+  }
+
+  .categoryArrow div {
+    border-right: 0px solid $dropdown-arrow-color;
+    border-top: 0px solid $dropdown-arrow-color;
+  }
+
+  .header:hover .categoryArrow div {
+    border-right: 0px solid $support-color;
+    border-top: 0px solid $support-color;
+  }
+}
+
+.nonEmpty {
+  .header {
+    cursor: pointer;
+  }
+
+  .categoryName {
+    font-size: 36px;
+    margin-right: 44px;
+    margin-top: 10px;
+    color: $primary-color;
+  }
+
+  .categoryArrow div {
+    border-right: 3px solid $dropdown-arrow-color;
+    border-top: 3px solid $dropdown-arrow-color;
+  }
+
+  .header:hover .categoryArrow div {
+    border-right: 3px solid $support-color;
+    border-top: 3px solid $support-color;
+  }
+}
+
 .categoryContent {
   display: grid;
   overflow: hidden;
@@ -48,23 +102,6 @@
 
 .catClosed .categoryContent {
   grid-template-rows: 0fr;
-}
-
-.categoryArrow div {
-  width: 20px;
-  height: 20px;
-  position: relative;
-  border-right: 3px solid $dropdown-arrow-color;
-  border-top: 3px solid $dropdown-arrow-color;
-  transform: rotate(-45deg);
-  top: 10px;
-  left: 5px;
-  transition: .1s;
-}
-
-.header:hover .categoryArrow div {
-  border-right: 3px solid $support-color;
-  border-top: 3px solid $support-color;
 }
 
 .categoryContent {

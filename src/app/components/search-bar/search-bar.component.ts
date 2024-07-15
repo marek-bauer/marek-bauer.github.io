@@ -51,7 +51,7 @@ export class SearchBarComponent {
       if (first == newVal) {
         this.shownSuggestions = [];
       } else {
-        this.shownSuggestions = searchRes;
+        this.shownSuggestions = searchRes.slice(0, this.maxSuggestions);
       }
     }
     this._numberOfSuggestions = this.shownSuggestions.length + 1;
