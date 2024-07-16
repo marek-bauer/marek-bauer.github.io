@@ -16,10 +16,6 @@ export class TypingTextComponent {
   
   @Input() set typed(input: BooleanInput) {
     this._typed = coerceBooleanProperty(input);
-    if (this._typed) {
-      this.writtenText = this.text;
-      this.position = this.text.length;
-    }
   }
 
   get typed() {
@@ -53,7 +49,12 @@ export class TypingTextComponent {
   }
 
   ngAfterViewInit(): void {
+    if (this.typed) {
+      this.writtenText = this.text;
+      this.position = this.text.length;
+    }
     this._ngZone.runOutsideAngular(() => {
+      console.log(this.text);
       setTimeout(this.typingEffect, this.typingSpeedMs);
     })
   }
