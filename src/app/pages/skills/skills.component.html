@@ -173,8 +173,30 @@
   </category>
 
   <category title="IT Domains" [skillLevelFn]="technicalSkill">
-    <ng-template skill name="Backend Development" [lvl]="80"></ng-template>
-    <ng-template skill name="Databases Management" [lvl]="75"></ng-template>
+    <ng-template skill name="Backend Development" [lvl]="80"
+      [tags]="[ 'Academic Experience', 'Professional Experience', 'MVC', 'Micro Services'
+              , 'Haskell', 'Java', 'PHP', 'REST API', 'CRUD']">
+      <p>
+        With extensive experience in backend development, I've used my skills
+        through various exciting projects. At Siemens, I developed microservices
+        for an airport luggage application using Spring (Java). At Standard
+        Chartered Bank, I contributed to a REST API written in Haskell. Beyond
+        my professional roles, I've also created numerous small projects during
+        my studies, showcasing my passion for continuous learning and
+        innovation.
+      </p>
+    </ng-template>
+    <ng-template skill name="Databases Management" [lvl]="75"
+    [tags]="[ 'Academic Experience', 'Professional Experience', 'SQL', 'Postgres'
+            , 'MySQL', 'SQLite', 'NoSQL', 'CRUD', 'Firebase']">
+      <p>
+        I bring a solid foundation in both relational and non-relational
+        databases. During my tenure at Standard Chartered Bank, I developed a
+        robust library for type-safe database querying. My academic journey also
+        provided hands-on experience with MongoDB and Firebase, allowing me to
+        explore and leverage the strengths of various database systems.
+      </p>
+    </ng-template>
     <ng-template skill name="Web Development" [lvl]="70"></ng-template>
     <ng-template skill name="Quality Assurance and Testing" [lvl]="65"></ng-template>
     <ng-template skill name="Graphical Interfaces" [lvl]="55"></ng-template>
