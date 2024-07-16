@@ -11,12 +11,15 @@
           <mat-icon>calendar_month</mat-icon>
           {{ printDate(publicationDate) }}
         </span>
-        @if(comments !== undefined) {
-          <span class="extra">
-            <mat-icon>comment</mat-icon>
-            {{ comments }}
-          </span>
-        }
+        <span class="extra">
+          <mat-icon>comment</mat-icon>
+          @if(comments !== undefined) {
+          {{ comments }}
+          }
+          @else {
+            ?
+          }
+        </span>
       </div>
     </mat-chip-set>
   </div>
