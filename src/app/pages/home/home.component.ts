@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TypingTextComponent } from '../../components/typing-text/typing-text.component';
 import { ButtonComponent } from '../../components/button/button.component';
+import { TypingTextComponent } from '../../components/typing-text/typing-text.component';
 
 @Component({
   selector: 'app-home',

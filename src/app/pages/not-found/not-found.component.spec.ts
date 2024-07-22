@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TypedTextComponent } from './typing-text.component';
+import { NotFoundComponent } from './not-found.component';
 
-describe('TypedTextComponent', () => {
-  let component: TypedTextComponent;
-  let fixture: ComponentFixture<TypedTextComponent>;
+describe('NotFoundComponent', () => {
+  let component: NotFoundComponent;
+  let fixture: ComponentFixture<NotFoundComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TypedTextComponent]
+      imports: [NotFoundComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TypedTextComponent);
+    fixture = TestBed.createComponent(NotFoundComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

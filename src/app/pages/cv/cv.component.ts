@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { TimelineComponent, Ev } from '../../components/timeline/timeline.component';
-import { TypingTextComponent } from '../../components/typing-text/typing-text.component';
+import { TypedTextComponent } from '../../components/typed-text/typed-text.component';
 
 @Component({
   selector: 'app-cv',
   standalone: true,
-  imports: [Ev, TimelineComponent, TypingTextComponent],
+  imports: [Ev, TimelineComponent, TypedTextComponent],
   templateUrl: './cv.component.html',
   styleUrl: './cv.component.scss'
 })

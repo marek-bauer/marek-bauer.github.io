@@ -1,0 +1,12 @@
+.not-found {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.img {
+  font-size: min(18vw, 140px);
+  padding: 10px
+}

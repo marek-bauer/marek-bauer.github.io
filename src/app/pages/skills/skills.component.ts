@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { SearchSkillsComponent, Category, Skill } from '../../components/search-skills/search-skills.component';
-import { TypingTextComponent } from '../../components/typing-text/typing-text.component';
+import { TypedTextComponent } from '../../components/typed-text/typed-text.component';
 
 @Component({
   selector: 'app-skills',
   standalone: true,
-  imports: [SearchSkillsComponent, Category, Skill, TypingTextComponent],
+  imports: [SearchSkillsComponent, Category, Skill, TypedTextComponent],
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.scss'
 })

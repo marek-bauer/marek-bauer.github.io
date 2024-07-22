@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TypedTextComponent } from './typing-text.component';
+import { TypedTextComponent } from './typed-text.component';
 
 describe('TypedTextComponent', () => {
   let component: TypedTextComponent;

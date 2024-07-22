@@ -1,5 +1,4 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Component, Input, NgZone, Inject } from '@angular/core';
+import { Component, Input, NgZone } from '@angular/core';
 
 @Component({
   selector: '[typing-text]',
@@ -13,20 +12,11 @@ export class TypingTextComponent {
   @Input() cursor: string = '_';
   @Input() typingSpeedMs: number = 200;
   @Input() coursorBlinkingMs: number = 500;
-  
-  @Input() set typed(input: BooleanInput) {
-    this._typed = coerceBooleanProperty(input);
-  }
 
-  get typed() {
-    return this._typed;
-  }
-
-  constructor(@Inject(NgZone) private _ngZone: NgZone) { }
+  constructor(private _ngZone: NgZone) { }
   
   cursorShown: boolean = true;
   writtenText: string = "";
-  private _typed: boolean = false;
   private position: number = 0;
 
   private typingEffect = () => {
@@ -49,12 +39,7 @@ export class TypingTextComponent {
   }
 
   ngAfterViewInit(): void {
-    if (this.typed) {
-      this.writtenText = this.text;
-      this.position = this.text.length;
-    }
     this._ngZone.runOutsideAngular(() => {
-      console.log(this.text);
       setTimeout(this.typingEffect, this.typingSpeedMs);
     })
   }

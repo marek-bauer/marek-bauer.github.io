@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { ListPositionComponent } from "../../components/list-position/list-position.component"
 import { CommentsService } from '../../services/comments/comments.service';
+import { TypedTextComponent } from '../../components/typed-text/typed-text.component';
 
 import Fuse from 'fuse.js';
-import { TypingTextComponent } from '../../components/typing-text/typing-text.component';
 
 type ArticleHeader = 
   { comments?: number
@@ -39,7 +39,7 @@ const fuseOptions = {
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [SearchBarComponent, ListPositionComponent, ListPositionComponent, TypingTextComponent],
+  imports: [SearchBarComponent, ListPositionComponent, ListPositionComponent, TypedTextComponent],
   templateUrl: './blog.component.html',
   styleUrl: './blog.component.scss'
 })
