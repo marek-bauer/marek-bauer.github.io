@@ -11,7 +11,7 @@ export class TypingTextComponent {
   @Input() text!: string;
   @Input() cursor: string = '_';
   @Input() typingSpeedMs: number = 200;
-  @Input() coursorBlinkingMs: number = 500;
+  @Input() cursorBlinkingMs: number = 500;
 
   constructor(private _ngZone: NgZone) { }
   
@@ -27,7 +27,7 @@ export class TypingTextComponent {
       });
       setTimeout(this.typingEffect, this.typingSpeedMs);
     } else {
-      setTimeout(this.blinkCursor, this.coursorBlinkingMs);
+      setTimeout(this.blinkCursor, this.cursorBlinkingMs);
     }
   }
 
@@ -35,7 +35,7 @@ export class TypingTextComponent {
     this._ngZone.run(() => {
       this.cursorShown = !this.cursorShown;
     });
-    setTimeout(this.blinkCursor, this.coursorBlinkingMs);
+    setTimeout(this.blinkCursor, this.cursorBlinkingMs);
   }
 
   ngAfterViewInit(): void {
