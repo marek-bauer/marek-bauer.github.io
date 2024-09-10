@@ -163,11 +163,11 @@ div:hover > .arrow > div {
   margin-bottom: 0;
 }
 
-.article {
-  a {
-    color: $primary-color;
-  }
+a {
+  color: $primary-color;
+}
 
+.article {
   h2, h3 {
     margin-top: 22px;
   }

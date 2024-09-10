@@ -17,7 +17,7 @@ export const articleList: Array<Article> =
     , title: "What logarithm is doing in the entropy formula?"
     , publicationDate: new Date('11 Jul 2024 17:00:00 GMT')
     , component: EntropyComponent 
-    , abstract: "TODO"
+    , abstract: "Short derivation of information and entropy formulas, based on assumptions what information is."
     , tags: ["Information theory", "Entropy", "Shannon theorem", "Fundamentals", "Encoding"]
     }
   ]
@@ -31,6 +31,7 @@ export function articleToRoute(a: Article): Route {
           , publicationDate: a.publicationDate
           , articleContent: a.component
           , tags: a.tags 
-          }
+          },
+    title: a.title
   }
 }

@@ -7,11 +7,11 @@ import { BlogComponent } from "./pages/blog/blog.component"
 import { NotFoundComponent } from "./pages/not-found/not-found.component"
 
 export const mainRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, title: "Portfolio - Marek Bauer" },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'cv', component: CvComponent },
-  { path: 'skills', component: SkillsComponent },
-  { path: 'blog', component: BlogComponent }
+  { path: 'cv', component: CvComponent, title: "CV - Marek Bauer" },
+  { path: 'skills', component: SkillsComponent, title: "Skills - Marek Bauer" },
+  { path: 'blog', component: BlogComponent, title: "Microblog - Marek Bauer" }
   ];
 
 export const routes: Routes = 
