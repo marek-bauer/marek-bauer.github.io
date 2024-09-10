@@ -1,5 +1,5 @@
-<mat-sidenav-container>
-  <mat-sidenav #sideNav class="sideBarMenu" fixedInViewport="fixed" fixedTopGap="56">
+<mat-sidenav-container style="z-index: 999;">
+  <mat-sidenav #sideNav class="sideBarMenu" fixedInViewport="fixed" fixedTopGap="56" style="z-index: 1000;">
     <ul>
       <li *ngFor="let page of pages; index as i">
         <a [routerLink]="page.link" routerLinkActive="active" (click)="sideNav.close()">

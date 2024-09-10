@@ -10,7 +10,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&family=VT323&family=Sedan+SC&display=swap');
 @import "./variables.scss";
 
-@include mat.all-component-themes($theme);
+@include mat.all-component-themes($light-theme);
+
+@media(prefers-color-scheme: dark) {
+  @include mat.all-component-colors($dark-theme);
+}
 
 @media #{$medium-and-up} {
   .hide-on-med-and-up {

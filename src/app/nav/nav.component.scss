@@ -85,7 +85,7 @@ nav ul a.active::after, nav ul a:hover::after {
 .sideBarMenu a {
   width: 100%;
   display: block;
-  color: black;
+  color: $primary-color;
   cursor: pointer;
   padding: 8px 8px;
   border-bottom: 1px solid $primary-color;

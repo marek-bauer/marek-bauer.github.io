@@ -15,11 +15,21 @@ $medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
 $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
 
 $primary-pallette: mat.define-palette(mat.$teal-palette);
-$accent-pallette: mat.define-palette(mat.$teal-palette, A200, A100, A700);
+$accent-pallette: mat.define-palette(mat.$cyan-palette, A400, A200, A100, A700);
 
-$theme: mat.define-light-theme((
+$light-theme: mat.define-light-theme((
   color: (
     primary: $primary-pallette,
+    accent: $accent-pallette,
+    warn: mat.define-palette(mat.$red-palette),
+  ),
+  typography: mat.define-typography-config(),
+  density: 1
+));
+
+$dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $accent-pallette,
     accent: $accent-pallette,
     warn: mat.define-palette(mat.$red-palette),
   ),
@@ -31,22 +41,78 @@ $terminal-font: "VT323", monospace;
 $alt-font: "Poetsen One", sans-serif;
 $date-font: "Sedan SC", serif;
 
-$primary-color: #40514E !default;
-$secondary-color: mat.get-color-from-palette($primary-pallette);
-$support-color: #00f1d1 !default;
-$background-color: mat.get-color-from-palette($primary-pallette, 50);
-$background-variant: white !default;
-$background-highlight: rgba(black, 0.12);
-$disabled-color: #949494 !default;
+$light-primary-color: #40514E;
+$light-secondary-color: mat.get-color-from-palette($primary-pallette);
+$light-support-color: #00f1d1;
+$light-background-color: mat.get-color-from-palette($primary-pallette, 50);
+$light-background-variant: white;
+$light-background-highlight: rgba(black, 0.12);
+$light-disabled-color: #949494;
 
-$dropdown-arrow-color: $disabled-color;
-$tag-color: $support-color;
+$dark-primary-color: #ecebeb !default;
+$dark-secondary-color: mat.get-color-from-palette($accent-pallette, 700);
+$dark-support-color: mat.get-color-from-palette($accent-pallette, 400);
+$dark-background-color: #373632;
+$dark-background-variant: #4b4b4b;
+$dark-background-highlight: rgba(rgb(255, 255, 255), 0.12);
+$dark-disabled-color: #cacaca !default;
 
-$progress-color: $secondary-color;
-$progress-background: rgba($progress-color, 0.15);
+:root {
+  --primary-color: #{$light-primary-color};
+  --secondary-color: #{$light-secondary-color};
+  --support-color: #{$light-support-color};
+  --background-color: #{$light-background-color};
+  --background-variant: #{$light-background-variant};
+  --background-highlight: #{$light-background-highlight};
+  --disabled-color: #{$light-disabled-color};
+  --dropdown-arrow-color: #{$light-disabled-color};
+  --tag-color: #{$light-support-color};
 
-$timeline-color: $primary-color;
-$timeline-highlight: $secondary-color;
+  --progress-color: #{$light-secondary-color};
+  --progress-background: #{rgba($light-secondary-color, 0.15)};
+
+  --timeline-color: #{$light-primary-color};
+  --timeline-highlight: #{$light-secondary-color};
+}
+
+@media(prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #{$dark-primary-color};
+    --secondary-color: #{$dark-secondary-color};
+    --support-color: #{$dark-support-color};
+    --background-color: #{$dark-background-color};
+    --background-variant: #{$dark-background-variant};
+    --background-highlight: #{$dark-background-highlight};
+    --disabled-color: #{$dark-disabled-color};
+    --dropdown-arrow-color: #{$dark-disabled-color};
+    --tag-color: #{$dark-support-color};
+  
+    --progress-color: #{$dark-secondary-color};
+    --progress-background: #{rgba($dark-secondary-color, 0.15)};
+  
+    --timeline-color: #{$dark-secondary-color};
+    --timeline-highlight: #{$dark-support-color};
+  }
+}
+
+$primary-color: var(--primary-color); // #40514E !default;
+$secondary-color: var(--secondary-color); // mat.get-color-from-palette($primary-pallette);
+$support-color: var(--support-color); // #00f1d1 !default;
+$background-color: var(--background-color); // mat.get-color-from-palette($primary-pallette, 50);
+$background-variant: var(--background-variant); // white !default;
+$background-highlight: var(--background-highlight); // rgba(black, 0.12);
+$disabled-color: var(--disabled-color); // #949494 !default;
+
+$dropdown-arrow-color: var(--dropdown-arrow-color); //color: $disabled-color;
+$tag-color: var(--tag-color); // $support-color;
+
+$progress-color: var(--progress-color); // $secondary-color;
+$progress-background: var(--progress-background); // rgba($progress-color, 0.15);
+
+$timeline-color: var(--timeline-color); // $primary-color;
+$timeline-highlight: var(--timeline-highlight); // $secondary-color;
+
+
 $timeline-width: 4px;
 $timeline-dash: 16px;
 $timeline-pos: 16px;
