@@ -67,6 +67,7 @@ $dark-disabled-color: #cacaca !default;
   --disabled-color: #{$light-disabled-color};
   --dropdown-arrow-color: #{$light-disabled-color};
   --tag-color: #{$light-support-color};
+  --frame-color: #{$light-secondary-color};
 
   --progress-color: #{$light-secondary-color};
   --progress-background: #{rgba($light-secondary-color, 0.15)};
@@ -86,6 +87,7 @@ $dark-disabled-color: #cacaca !default;
     --disabled-color: #{$dark-disabled-color};
     --dropdown-arrow-color: #{$dark-disabled-color};
     --tag-color: #{$dark-support-color};
+    --frame-color: #{$dark-support-color};
   
     --progress-color: #{$dark-secondary-color};
     --progress-background: #{rgba($dark-secondary-color, 0.15)};
@@ -102,6 +104,7 @@ $background-color: var(--background-color); // mat.get-color-from-palette($prima
 $background-variant: var(--background-variant); // white !default;
 $background-highlight: var(--background-highlight); // rgba(black, 0.12);
 $disabled-color: var(--disabled-color); // #949494 !default;
+$frame-color: var(--frame-color);
 
 $dropdown-arrow-color: var(--dropdown-arrow-color); //color: $disabled-color;
 $tag-color: var(--tag-color); // $support-color;
