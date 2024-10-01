@@ -1,5 +1,6 @@
 import { Component, Type } from '@angular/core';
 import { EntropyComponent } from './entropy/entropy.component';
+import { ApplicativeBatchingComponent } from './applicative-batching/applicative-batching.component';
 import { ArticleComponent } from '../../components/article/article.component';
 import { Route } from '@angular/router';
 
@@ -19,6 +20,13 @@ export const articleList: Array<Article> =
     , component: EntropyComponent 
     , abstract: "Short derivation of information and entropy formulas, based on assumptions what information is."
     , tags: ["Information theory", "Entropy", "Shannon theorem", "Fundamentals", "Encoding"]
+    }
+  , { key: "fun-with-applicative-batching"
+    , title: "Fun with Applicative - Batching"
+    , publicationDate: new Date('1 Oct 2024 17:00:00 GMT')
+    , component: ApplicativeBatchingComponent 
+    , abstract: "Explores the distinctions between applicative functors and monads in Haskell, emphasizing the benefits of using applicatives for batching queries without interdependencies. It demonstrates how to implement batching with applicative functors, and Fetch monad."
+    , tags: ["Applicative", "Haskell", "Batching", "Fetch"]
     }
   ]
 

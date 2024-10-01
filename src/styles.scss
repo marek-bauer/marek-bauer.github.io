@@ -66,6 +66,10 @@ h3 {
   font-size: 24pt;
 }
 
+p {
+  font-size: $p-font-size;
+}
+
 html {
   background-color: $background-color;
 }
@@ -149,7 +153,7 @@ div:hover > .arrow > div {
   padding: 20px 10px 10px 10px;
   border: 4px solid $frame-color;
   position: relative;
-  margin-top: 12px;
+  margin-top: 22px;
 }
 
 .frame::after {
@@ -185,12 +189,6 @@ a {
   p eq {
     display: inline-block;
     height: 1px;
-  }
-
-  .code {
-    display: inline-block;
-    background-color: $background-variant;
-    border: 1px solid $disabled-color;
   }
 
   line-height: 20px;

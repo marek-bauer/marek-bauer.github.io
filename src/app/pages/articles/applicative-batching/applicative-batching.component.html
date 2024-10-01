@@ -1,0 +1,455 @@
+<h3>What is an Applicative Functor?</h3>
+
+<p>
+  Many Haskell developers wonder, what purpose does the 
+  <code-line lang="Haskell" code="Applicative"></code-line> class serve? 
+  We all know and love <code-line lang="Haskell" code="Functor"></code-line>
+  and <code-line lang="Haskell" code="Monad"></code-line>, but 
+  <code-line lang="Haskell" code="Applicative"></code-line> seems to be often
+  misunderstood.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'class (Functor f) => Applicative f where'
+  , '  pure  :: a -> f a'
+  , '  (<*>) :: f (a -> b) -> f a -> f b'
+  ]"></code-block>
+
+<code-block lang="Haskell" [code]="
+  [ 'pure id <*> v = v                            -- Identity'
+  , 'pure f <*> pure x = pure (f x)               -- Homomorphism'
+  , 'u <*> pure y = pure ($ y) <*> u              -- Interchange'
+  , 'pure (.) <*> u <*> v <*> w = u <*> (v <*> w) -- Composition'
+  ]"></code-block>
+
+<p>
+  As we see in the definition above, the 
+  <code-line lang="Haskell" code="Applicative"></code-line> class has two key 
+  functions: <code-line lang="Haskell" code="pure"></code-line>, which acts as 
+  a wrapper (serving the same purpose as the monad's 
+  <code-line lang="Haskell" code="return"></code-line>, often used in its 
+  place), and <code-line lang="Haskell" code="(<*>)"></code-line>, which applies 
+  a function wrapped in the applicative functor. Both of these are frequently 
+  used. 
+</p>
+
+<p>
+  If everyone uses functions that are part of the <code-line lang="Haskell"
+  code="Applicative"></code-line> class definition, why do many Haskell
+  developers fail to see its purpose? The answer lies in its more powerful
+  sibling, the <code-line lang="Haskell" code="Monad"></code-line>, 
+  which encompasses all of its features and more.
+</p>
+
+
+<h3>Why not just simply use Monads instead?</h3>
+
+<p>
+  We can answer this with a simple quote from the Spider-Man comic books: "With
+  great power comes great responsibility." More specifically, there are two
+  major reasons. The first reason is that not every Applicative Functor is a
+  Monad. This should not come as a surprise—more lenient requirements allow more
+  data structures to fit in. One such example of an applicative functor this is
+  not a monad is <code-line lang="Haskell" code="Const"></code-line>.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'newtype Const r a = Const { unConst :: r }'
+  , ''
+  , 'instance Functor (Const r) where'
+  , '  fmap _ (Const r) = Const r'
+  , ''
+  , 'instance (Monoid r) => Applicative (Const r) where'
+  , '  pure _ = Const mempty'
+  , '  Const r <*> Const r\' = Const $ r <> r\''
+  ]"></code-block>
+
+<div class="frame" frame-name="Why not a Monad?">
+  <p>
+    Of course, we can easily define some <code-line lang="Haskell"
+    code="Monad"></code-line> implementation for <code-line lang="Haskell"
+    code="Const"></code-line>.
+  </p>
+
+  <code-block lang="Haskell" [code]="
+  [ 'instance Monoid a => Monad (Const a) where'
+  , '  return _ = Const mempty'
+  , '  (Const x) >>= _ = Const x'
+  ]"></code-block>
+
+  <p>
+    This is the only possible <code-line lang="Haskell"
+    code="Monad"></code-line> implementation for <code-line lang="Haskell"
+    code="Const"></code-line>, since we cannot use provided function in
+    <code-line lang="Haskell" code="(>>=)"></code-line> definition without
+    having an element of the expected type.
+  </p>
+
+  <p>
+    The proper <code-line lang="Haskell" code="Monad"></code-line> instance must
+    satisfy the left identity law, which states that 
+    <code-line lang="Haskell" code="pure x >>= f = f x"></code-line>. In this 
+    implementation, however, we know that 
+    <code-line lang="Haskell" code="pure x >>= f = Const mempty >>= f = Const mempty"></code-line>, 
+    which is not true, for example, if 
+    <code-line lang="Haskell" code="f x = 1"></code-line>.
+  </p>
+</div>
+
+<p>
+  The second reason is that if code only uses applicative functors instead of 
+  monads, it means we don't need to handle certain cases. For example, if your 
+  code uses an applicative functor to call a backend API, we know that it does 
+  not use information from previous queries to formulate the next one.
+</p>
+
+
+<h3>Limitations That Help with Batching</h3>
+
+<p>
+  With the applicative functor <code-line lang="Haskell" code="f"></code-line>, we can merge multiple results, such as 
+  <code-line lang="Haskell" code="f result"></code-line>, under a single applicative functor 
+  <code-line lang="Haskell" code="f"></code-line> using the 
+  <code-line lang="Haskell" code="(<*>)"></code-line> operation.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ '(,,)'
+  , '  <$> (fetchViews :: f Int)'
+  , '  <*> (fetchLikes :: f Int)'
+  , '  <*> (fetchComments :: f [String])'
+  ]"></code-block>
+
+<p>
+  However, as mentioned before, it's impossible to base one query on the response from another. 
+  While you can write such code, the result will be 
+  <code-line lang="Haskell" code="f (f result)"></code-line>.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'fn :: (Applicative f) => (Int -> f Int) -> Int -> f (f Int)'
+  , 'fn fetch inp = fetch <$> fetch inp'
+  ]"></code-block>
+
+<p>
+  So, using an Applicative Functor prevents the programmer from making interdependent queries, 
+  or more precisely, it makes the interdependency visible in the query type.
+</p>
+
+<h3>Batching of Queries with Applicative Functor</h3>
+
+<p>
+  Let's start by defining the type of queries, that carries continuation for
+  results as the last parameter:
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'data Query a'
+  , '  = GetComments Int ([String] -> a)'
+  , '  | GetViews Int (Int -> a)'
+  , '  | ...'
+  ]"></code-block>
+
+<p>
+  For this type, we can easily define a <code-line lang="Haskell" code="Functor"></code-line> instance, 
+  which will be useful later.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'instance Functor Query where'
+  , '  fmap f (GetComments x callback) = GetComments x $ f . callback'
+  , '  fmap f (GetViews x callback) = GetViews x $ f . callback'
+  , '  ...'
+  ]"></code-block>
+
+<p>
+  Now let's look at an example of a black-box function that uses these queries to render a page:
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'renderPage :: Applicative f => (forall a. Query a -> f a) -> Int -> f Html'
+  , 'renderPage fetcher id = ...'
+  ]"></code-block>
+
+<p>
+  At first glance, you might assume that introducing batching for such a function requires changing something inside it. 
+  Fortunately, that is unnecessary, thanks to the power of <code-line lang="Haskell" code="Applicative"></code-line>.
+</p>
+
+<div class="frame" frame-name="What is Batching">
+  <p>
+    Batching is the concept of grouping requests together. Instead of fetching a response for each request separately from the server, 
+    we fetch them all in a single request. For this to make sense, we assume that the order of these requests does not matter, 
+    and the timing of these requests is not critical.
+  </p>
+</div>
+
+<p>
+  Thanks to <code-line lang="Haskell" code="Applicative"></code-line>, we know
+  that there are no interdependent queries, so batching all queries together is
+  possible. We can first collect all required queries, run them in one batch,
+  and later compute the results using the response of batched query.
+</p>
+<p>
+  To collect all the queries, we can use the <code-line lang="Haskell"
+  code="Const"></code-line> applicative functor we introduced earlier.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'collectQueries'
+  , '  :: forall r'
+  , '   . (forall f. Applicative f => (forall a. Query a -> f a) -> f r)'
+  , '  -> [Query ()]'
+  , 'collectQueries func = unConst (func runner)'
+  , '  where'
+  , '    runner :: Query a -> Const [Query ()] a'
+  , '    runner = Const . pure . fmap $ const ()'
+  ]"></code-block>
+
+<p>
+  Let's assume we have a function that can fetch batched queries:
+</p>
+
+<code-block lang="Haskell" code="fetchBatched :: [Query ()] -> f (forall a. Query a -> a)"></code-block>
+
+<p>
+  The result is partial function that can fail for any queries that were not
+  provided earlier. To define the final batching function, we will need to use
+  the <code-line lang="Haskell" code="Identity"></code-line> functor.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'newtype Identity a = Identity { unIdentity :: a }'
+  ]"></code-block>
+
+<p>
+  The functor instance for this type is trivial, so we will omit it here. Now that we have all the tools, 
+  we can define our batching function.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'runBatched '
+  , '  :: forall r f'
+  , '   . Functor f'
+  , '  => ([Query ()] -> f (forall a. Query a -> a))'
+  , '  -> (forall g. Applicative g => (forall a. Query a -> g a) -> g r)'
+  , '  -> f r'
+  , 'runBatched fetchBatched func '
+  , '  = runFuncId <$> fetchBatched usedQueries'
+  , '  where '
+  , '    usedQueries :: [Query ()]'
+  , '    usedQueries = collectQueries func'
+  , ''
+  , '    runFuncId :: (forall a. Query a -> a) -> r'
+  , '    runFuncId runner = unIdentity . func $ Identity . runner'
+  ]"></code-block>
+
+<p>
+  Using the function above, we can run any computation that uses 
+  <code-line lang="Haskell" code="Query"></code-line> with batching.
+</p>
+
+<h3>Batching with Interdependent Queries</h3>
+
+<p>
+  In most real-life scenarios, defining your computations using an applicative
+  functor instead of a monad is impractical. The majority of business code
+  requires some queries to be interdependent queries. Can we still use
+  applicative batching when possible and combine it with monads?
+</p>
+
+<p>
+  If we strictly follow the monad laws, then no, it is impossible. However, in
+  practice, we usually don't need to follow all the laws as long as the
+  computations remain predictable. In this section, I will rely on 
+  <a href="https://simonmar.github.io/bib/papers/haxl-icfp14.pdf" target="_blank">this paper</a>, 
+  which is the foundation of the <a href="https://hackage.haskell.org/package/haxl" target="_blank">Haxl library</a>. 
+  I will explain the basics of this concept without going into full detail; for a more in-depth understanding, 
+  I recommend reading the original paper.
+</p>
+
+<p>
+  The rule we need to break is <code-line lang="Haskell" code="(<*>) = ap"></code-line>. 
+  If we adhered to this rule, we would need to treat all
+  queries as interdependent, making batching impossible. Let's start with a
+  simple monad of computations that can be blocked:
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'data Fetch a'
+  , '  = Done a'
+  , '  | Blocked (Fetch a)'
+  ]"></code-block>
+
+<p>
+  For this data structure, we can easily define a monad instance:
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'instance Monad Fetch where'
+  , '  return = Done'
+  , '  x >>= f = case x of'
+  , '    Done a -> f x'
+  , '    Blocked a -> Blocked $ x >>= f'
+  ]"></code-block>
+
+<p>
+  If the computation is blocked, we need to go deeper and apply <code-line
+  lang="Haskell" code="f"></code-line>. There is no way to reduce the <code-line
+  lang="Haskell" code="Blocked"></code-line> constructors. However, we can
+  perform some reductions with the <code-line lang="Haskell"
+  code="Applicative"></code-line> instance.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'instance Applicative Fetch where'
+  , '  return = Done'
+  , '  (Done f)    <*> (Done x)    = Done $ f x'
+  , '  (Done f)    <*> (Blocked x) = Blocked $ f <$> x'
+  , '  (Blocked f) <*> (Done x)    = Blocked $ f <*> (Done x)'
+  , '  (Blocked f) <*> (Blocked x) = Blocked $ f <*> x'
+  ]"></code-block>
+
+<p>
+  As we can see above, we were able to delay merging two blocked computations under a single 
+  <code-line lang="Haskell" code="Blocked"></code-line> constructor. 
+  This is because computations merged using <code-line lang="Haskell" code="(<*>)"></code-line> 
+  are not interdependent.
+</p>
+
+<p>
+  We can use this concept to define a real <code-line lang="Haskell"
+  code="Fetch"></code-line> monad that provides automatic batching for requests
+  where the <code-line lang="Haskell" code="(<*>)"></code-line> operation is
+  used. To achieve this, we need to extend the <code-line lang="Haskell"
+  code="Blocked"></code-line> constructor with a list of pending queries and a
+  way to resume computations:
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'data Fetch a'
+  , '  = Done a'
+  , '  | Blocked [Query ()] ((forall b. Query b -> b) -> Fetch a)'
+  ]"></code-block>
+
+<p>
+  We can rewrite the instances for this monad:
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'instance Functor Fetch where'
+  , '  fmap f (Done a) = Done $ f a'
+  , '  fmap f (Blocked q susp_a) = Blocked q $ \\res -> f <$> (susp_a res)'
+  , '  '
+  , 'instance Applicative Fetch where'
+  , '  pure = Done '
+  , ''
+  , '  (Done f) <*> (Done a) = Done $ f a'
+  , '  (Done f) <*> (Blocked q a) '
+  , '    = Blocked q $ \\res -> f <$> (susp_a res) '
+  , '  (Blocked q susp_f) <*> (Done a) '
+  , '    = Blocked q $ \\res -> (susp_f res) <*> (Done a)'
+  , '  (Blocked q susp_f) <*> (Blocked q\' susp_a) '
+  , '    = Blocked (q <> q\') $ \\res -> (susp_f res) <*> (susp_a res)'
+  , ''
+  , 'instance Monad Fetch where'
+  , '  return = pure '
+  , ''
+  , '  (Done a) >>= f = f a'
+  , '  (Blocked q susp_a) >>= f = Blocked q $ \\res -> (susp_a res) >>= f'
+  ]"></code-block>
+
+<p>
+  We also need a way to fetch data:
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'fetch :: Query a -> Fetch a'
+  , 'fetch query = Blocked [const () <$> query] $ \\res -> Done $ res query'
+  ]"></code-block>
+
+<p>
+  Lastly, we need a way to run this monad when provided with a runner for batched queries:
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'runFetch '
+  , '  :: forall r m'
+  , '   . Monad m'
+  , '  => ([Query ()] -> m (forall a. Query a -> a)) '
+  , '  -> Fetch r '
+  , '  -> m r'
+  , 'runFetch fetchBatched = \\case '
+  , '  Done a -> pure a'
+  , '  Blocked q susp -> fetchBatched q >>= runFetch fetchBatched . susp'
+  ]"></code-block>
+
+
+<h3>Exercise 1</h3>
+
+<p>
+  Play with this concept using a fake runner:
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'fakeRunner :: [Query ()] -> IO (forall a. Query a -> a)'
+  , 'fakeRunner queries = print queries $> runQuery'
+  , '  where'
+  , '    runQuery :: forall a. Query a -> a'
+  , '    runQuery = \\case '
+  , '      GetViews page callback -> callback $ 2 * page'
+  , '      GetComments page callback -> callback $ []'
+  ]"></code-block>
+
+<p>
+  What is the difference in batching when using the following?
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'forA\' :: Applicative f => [a] -> (a -> f b) -> f [b]'
+  , 'forA\' l f = foldr (\x acc -> (:) <$> f x <*> acc) (pure []) l'
+  , ''
+  , 'forM\' :: Monad m => [a] -> (a -> m b) -> m [b]'
+  , 'forM\' l f = foldr (\x acc -> f x >>= \\x\' -> (x\':) <$> acc) (return []) l'
+  ]"></code-block>
+
+<p>
+  In how many batches will the following code run? Can you improve it?
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'example :: Int -> Fetch [(Int, Int, [String])]'
+  , 'example page = forA\' [1 .. page] $ \\i -> do'
+  , '  a <- fetch $ GetViews i id'
+  , '  b <- fetch $ GetViews a id'
+  , '  comments <- fetch $ GetComments a id'
+  , '  pure (a,b,comments)'
+  ]"></code-block>
+
+<h3>Exercise 2</h3>
+
+<p>
+  Define the monad transformer <code-line lang="Haskell" code="FetchT"></code-line>.
+</p>
+
+<code-block lang="Haskell" [code]="
+  [ 'data FetchT q m a'
+  , '  = Done (m a)'
+  , '  | Blocked [q ()] ((forall b. q b -> b) -> m (FetchT q m a))'
+  ]"></code-block>
+
+<p>
+  You can also try creating your own definition. You can check out my solution
+  <a href="https://gist.github.com/marek-bauer/8f32879fb1ce73f1891906038cd0f625" target="_blank">here</a>, 
+  but I recommend trying it yourself first.
+</p>
+
+<h3>References</h3>
+
+<ul>
+  <li>
+    <a href="https://simonmar.github.io/bib/papers/haxl-icfp14.pdf" target="_blank">
+      There is no Fork: an Abstraction for Efficient, Concurrent, and Concise
+      Data Access</a>
+  </li>
+</ul>
