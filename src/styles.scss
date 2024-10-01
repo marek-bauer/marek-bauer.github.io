@@ -5,16 +5,13 @@
 
 @include mat.core();
 
-@import 'highlight.js/styles/github.css';
+
 @import "katex/dist/katex.css";
 @import url('https://fonts.googleapis.com/css2?family=Poetsen+One&family=VT323&family=Sedan+SC&display=swap');
 @import "./variables.scss";
 
 @include mat.all-component-themes($light-theme);
-
-@media(prefers-color-scheme: dark) {
-  @include mat.all-component-colors($dark-theme);
-}
+@import './code.scss';
 
 @media #{$medium-and-up} {
   .hide-on-med-and-up {
@@ -183,6 +180,12 @@ a {
   p eq {
     display: inline-block;
     height: 1px;
+  }
+
+  .code {
+    display: inline-block;
+    background-color: $background-variant;
+    border: 1px solid $disabled-color;
   }
 
   line-height: 20px;

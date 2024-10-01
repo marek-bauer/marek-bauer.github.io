@@ -30,7 +30,13 @@ export const appConfig: ApplicationConfig = {
     provideAuth(() => getAuth()), 
     provideFirestore(() => getFirestore()),
     provideHighlightOptions({
-      fullLibraryLoader: () => import('highlight.js')
+      coreLibraryLoader: () => import('highlight.js/lib/core'),
+      languages: {
+        typescript: () => import('highlight.js/lib/languages/typescript'),
+        css: () => import('highlight.js/lib/languages/css'),
+        xml: () => import('highlight.js/lib/languages/xml'),
+        haskell: () => import('highlight.js/lib/languages/haskell')
+      }
     })
   ]
 };
