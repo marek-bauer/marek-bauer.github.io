@@ -92,7 +92,7 @@
     implementation, however, we know that 
     <code-line lang="Haskell" code="pure x >>= f = Const mempty >>= f = Const mempty"></code-line>, 
     which is not true, for example, if 
-    <code-line lang="Haskell" code="f x = 1"></code-line>.
+    <code-line lang="Haskell" code="f x = Const 1"></code-line>.
   </p>
 </div>
 
