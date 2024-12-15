@@ -1,5 +1,6 @@
 import { Component, Type } from '@angular/core';
 import { EntropyComponent } from './entropy/entropy.component';
+import { GranularEffectTypeClassesComponent } from './granular-effect-type-classes/granular-effect-type-classes.component';
 import { ApplicativeBatchingComponent } from './applicative-batching/applicative-batching.component';
 import { ArticleComponent } from '../../components/article/article.component';
 import { Route } from '@angular/router';
@@ -27,6 +28,13 @@ export const articleList: Array<Article> =
     , component: ApplicativeBatchingComponent 
     , abstract: "Explores the distinctions between applicative functors and monads in Haskell, emphasizing the benefits of using applicatives for batching queries without interdependencies. It demonstrates how to implement batching with applicative functors, and Fetch monad."
     , tags: ["Applicative", "Haskell", "Batching", "Fetch"]
+    }
+  , { key: "the-case-for-granular-effect-type-classes"
+    , title: "The case for granular effect monad type classes"
+    , publicationDate: new Date('17 Dec 2024 17:00:00 GMT')
+    , component: GranularEffectTypeClassesComponent 
+    , abstract: "TODO"
+    , tags: []
     }
   ]
 
