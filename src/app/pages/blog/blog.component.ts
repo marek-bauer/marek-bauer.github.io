@@ -44,7 +44,9 @@ const fuseOptions = {
   styleUrl: './blog.component.scss'
 })
 export class BlogComponent {
-  articles: Array<ArticleHeader> = articleList;
+  articles: Array<ArticleHeader> = articleList
+    .sort((a, b) => b.publicationDate.getTime() - a.publicationDate.getTime());
+    // Sort from the newest to the oldest article
   shownArticles: Set<string> = new Set(articleList.map(x => x.key));
   suggestions: Array<{name: string, aliases: Array<string>}> 
     = [ ...articleList.map(x => ({name: x.title, aliases: []}))
