@@ -27,14 +27,14 @@ export const articleList: Array<Article> =
     , publicationDate: new Date('1 Oct 2024 17:00:00 GMT')
     , component: ApplicativeBatchingComponent 
     , abstract: "Explores the distinctions between applicative functors and monads in Haskell, emphasizing the benefits of using applicatives for batching queries without interdependencies. It demonstrates how to implement batching with applicative functors, and Fetch monad."
-    , tags: ["Applicative", "Haskell", "Batching", "Fetch"]
+    , tags: ["Applicative", "Haskell", "Functional Programming", "Batching", "Fetch"]
     }
   , { key: "the-case-for-granular-effect-type-classes"
     , title: "The case for granular effect monad type classes"
-    , publicationDate: new Date('17 Dec 2024 17:00:00 GMT')
+    , publicationDate: new Date('22 Dec 2024 17:00:00 GMT')
     , component: GranularEffectTypeClassesComponent 
-    , abstract: "TODO"
-    , tags: []
+    , abstract: "This article explores granular effect monad type classes in Haskell, highlighting their advantages over the traditional MonadIO approach. Granular effect monad type classes support single effects, making code more predictable and maintainable. The article discusses the limitations of MonadIO, benefits of granular effect monad type classes for code optimization, and the importance of explicit effect handling."
+    , tags: ["Haskell", "Functional Programming", "Code Optimization", "Code Optimization", "Testing", "Type Classes"]
     }
   ]
 

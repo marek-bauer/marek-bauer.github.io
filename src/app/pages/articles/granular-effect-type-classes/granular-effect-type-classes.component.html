@@ -1,66 +1,67 @@
 <h3>Introduction</h3>
 <p>
-  Some time ago I was wondering if for functions with IO effects I should write
+  Some time ago, I was wondering if for functions with IO effects I should write
   it as <code-line lang="Haskell" code="fn :: a -> IO b"></code-line> or as
   <code-line lang="Haskell" code="fn :: MonadIO m => a -> m b"></code-line>.
-  Both approaches have some advantages, the first one is more straightforward,
+  Both approaches have some advantages. The first one is more straightforward,
   therefore easier to read, and the second one is more flexible, but at the cost
-  of potentially having more confusing error messages. At the time I didn't see
+  of potentially having more confusing error messages. At the time, I didn't see
   that both approaches were wrong in many aspects. Let me introduce you to
   granular effect monad type classes. The granular effect monad type class is
-  simply a type class that supports single effect like: writing to terminal,
-  reading from terminal or fetching data from database.
+  simply a type class that supports a single effect like writing to the terminal,
+  reading from the terminal, or fetching data from a database.
 </p>
 
 <h3>Why Use Granular Effect Monad Type Classes?</h3>
 
 <p>
-  The problem with the MonadIO type class is that the set IO effects is too big
-  and it handles all communications with the outside world. And not all
-  communications are made equal. Let's take an example of the effect of
-  randomness. We want to define a function that randomly selects one element
-  from a list, it isn't deterministic so it cannot be pure. It needs seed from
-  the real world so most likely it would get defined as <code-line
-  lang="Haskell" code="selectRand :: MonadIO m => [a] -> m a"></code-line>. But
-  it is overkill to use all mighty <code-line lang="Haskell"
-  code="MonadIO"></code-line> to randomly select an element of a list. In such
-  cases the correct (in my opinion) approach is to define a new type class that
-  gives us randomness. 
+  The problem with the <code-line lang="Haskell" code="MonadIO"></code-line>
+  type class is that the set of IO effects is too big and it handles all
+  communications with the outside world. And not all communications are made
+  equal. Let's take an example of the effect of randomness. We want to define a
+  function that randomly selects one element from a list. It isn't
+  deterministic, so it cannot be pure. It needs a seed from the real world, so
+  most likely it would get defined as <code-line lang="Haskell" code="selectRand
+  :: MonadIO m => [a] -> m a"></code-line>. But it is overkill to use the
+  all-mighty <code-line lang="Haskell" code="MonadIO"></code-line> to randomly
+  select an element of a list. In such cases, the correct (in my opinion)
+  approach is to define a new type class that gives us randomness.
 </p>
 
 <code-block lang="Haskell" [code]="
-  [ 'class Monad m => MonadRand m where '
+  [ 'class Monad m => MonadRand m where'
   , '  selectRand :: [a] -> m a'
   ]"></code-block>
 
 <p>
-  For such a type class we can easily define an instance for  <code-line
+  For such a type class, we can easily define an instance for the <code-line
   lang="Haskell" code="IO"></code-line> monad. Constraints are by definition
-  easy to compose so there is no problem with having a function that uses
-  multiple effects e.g. <code-line lang="Haskell" 
+  easy to compose, so there is no problem with having a function that uses
+  multiple effects, e.g., <code-line lang="Haskell" 
   code="func :: (MonadRand m, MonadPrint m, MonadFetch m) => m Result"></code-line>.
 </p>
 
 <div class="frame" frame-name="Problem with Overlapping Instance">
-  You might be tempted to define instance using <code-line lang="Haskell" code="MonadIO"></code-line>:
+  You might be tempted to define an instance using <code-line lang="Haskell" code="MonadIO"></code-line>:
 
   <code-block lang="Haskell" [code]="
     [ 'instance MonadIO m => MonadRand m where'
     ]"></code-block>
 
-  This however requires UndecidableInstances extension, and generates future
+  This, however, requires the <code-line lang=""
+  code="UndecidableInstances"></code-line> extension and generates future
   problems with overlapping if we want to define other instances for this type
   class. So it is not a recommended approach.  
 </div>
 
 <div class="frame" frame-name="This is NOT a Case Against IO Monad">
   I am not proposing dropping <code-line lang="Haskell" code="IO"></code-line>
-  entirely, in my opinion <code-line lang="Haskell" code="IO"></code-line> has
+  entirely. In my opinion, <code-line lang="Haskell" code="IO"></code-line> has
   the advantage of being really easy to use, in contrast to some more advanced
   effect monads. Monad <code-line lang="Haskell" code="IO"></code-line> can be a
   perfectly good instance for granular effect monad type classes. This approach
   does not force us into using granular effect monads like old Purescript's
-  <code-line lang="Purescript" code="Eff"></code-line>.
+  <code-line lang="Haskell" code="Eff"></code-line>.
 </div>
 
 <h3>Code Optimization</h3>
@@ -68,35 +69,43 @@
 <p>
   I personally believe that the introduction of <code-line lang="Haskell"
   code="IO"></code-line> monad is the selling point in Haskell. In the
-  conventional imperative languages like Python, Java or C++ you can never be
+  beginning, it might seem like a good idea to use <code-line lang="Haskell"
+  code="MonadIO"></code-line> everywhere, but as the codebase grows, it becomes
+  harder to manage. Granular effect monad type classes provide a way to
+  structure the code better and make it more maintainable.
+</p>
+
+<p>
+  By using granular effect monad type classes, we can achieve better code
+  optimization and separation of concerns. Each effect can be handled
+  independently, making the code more modular and easier to test.
+</p>
+
+<p>
+  In conventional imperative languages like Python, Java, or C++, you can never be
   sure if used functions have some effects or not. This makes the lives of
-  programmers and compilers harder, since we often need to look into code to
+  programmers and compilers harder, since we often need to look into the code to
   know if the function is pure or not. This is annoying and sometimes impossible
   when the language is only an interface for a library written in C (yes, I am
-  talking about you Python). For example you see function like this:
+  talking about you, Python). For example, you see a function like this:
 </p>
 
 <code-block lang="Python" [code]="
   [ 'def example(a, b, c):'
   , '  d = function(a, b)'
   , '  if c and d:'
-  , '    print \'someting\''
+  , '    print(\'something\')'
   ]"></code-block>
 
 <p>
-  Looks like an obvious place for optimization, right? Why to simply take
-  advantage of lazy evaluation of or? 
+  Looks like an obvious place for optimization, right? Why not simply take
+  advantage of lazy evaluation of <code-line lang="Python"
+  code="or"></code-line>? 
 </p>
 
-<code-block lang="Python" [code]="
-  [ 'def example(a, b, c):'
-  , '  if c and function(a, b):'
-  , '    print \'someting\''
-  ]"></code-block>
-
 <p>
-  Wrong! The function might depend on effects. Let's take a look into almost
-  identical function:
+  But what if <code-line lang="Python" code="function(a, b)"></code-line> has
+  some side effects? Let's rewrite the code to make it more explicit:
 </p>
 
 <code-block lang="Python" [code]="
@@ -109,22 +118,24 @@
 <p>
   Now it looks like an obviously bad idea to make such an optimization. We all
   agree that depending on function names to know if optimization is correct or
-  not is a slippery slope, and in practice it will one day cause some unexpected
-  bugs after code refactoring. Haskell solves it by making a clear type
-  distinction between the <code-line lang="Haskell" code="equals :: String ->
+  not is a slippery slope, and in practice, it will one day cause some unexpected
+  bugs after code refactoring. Haskell solves this by making a clear type
+  distinction between <code-line lang="Haskell" code="equals :: String ->
   String -> Bool"></code-line> and <code-line lang="Haskell" code="writeToFile
-  :: String -> String -> IO Bool"></code-line>. Thanks to this invention we
-  don't need to trust other programs that function that sound like pure
+  :: String -> String -> IO Bool"></code-line>. Thanks to this invention, we
+  don't need to trust other programmers that functions that sound like pure
   functions are indeed pure.
 </p>
 
 <p>
-  You might think all our problems were solved by the introduction of <code-line
-  lang="Haskell" code="IO"></code-line>, but not all effects are equal. Some
-  like writing to file are changing the stage of "real world" and some are not.
-  Example of the second group is fetching some data from a database or checking
-  if a file exists or not. Usually in Haskell they also use the same monad
-  <code-line lang="Haskell" code="IO"></code-line>. Let's see some examples:
+  By using granular effect monad type classes, we can make our code even more
+  predictable and maintainable. Each effect is explicitly stated in the type
+  signature, making it easier to understand and reason about the code. Some
+  effects, like writing to a file, change the state of the "real world" and some
+  do not. An example of the second group is fetching some data from a database
+  or checking if a file exists or not. Usually, in Haskell, they also use the
+  same monad <code-line lang="Haskell" code="IO"></code-line>. Let's see some
+  examples:
 </p>
 
 <code-block lang="Haskell" [code]="
@@ -137,53 +148,54 @@
   ]"></code-block>
 
 <p>
-  In this case we see that this is sub-optimal since there is no point of
+  In this case, we see that this is sub-optimal since there is no point in
   checking the existence of a file if we do not want to show the message to the
-  user. But we cannot deduce it based only on the type of functions. Therefore
-  it is crucial to introduce more granular effects monad classes.
+  user. But we cannot deduce this based only on the type of functions. Therefore,
+  it is crucial to introduce more granular effect monad classes.
 </p>
 
-<h3>More information is always a win</h3>
+<h3>More Information is Always a Win</h3>
 
 <p>
-  In the previous section we saw why we need at least two types of monad classes
-  to be able to optimize code without changing its semantics. However code
+  In the previous section, we saw why we need at least two types of monad classes
+  to be able to optimize code without changing its semantics. However, code
   optimization is not the only place where more information about function
-  effects is helpful. 
+  effects is helpful.
 </p>
 
-<div class="frame" frame-name="Ignoring unwanted effects">
-  It is often the case that we do not always care about effects that the
-  function is producing. For example, the effect of writing to the screen
+<div class="frame" frame-name="Ignoring Unwanted Effects">
+  It is often the case that we do not always care about the effects that the
+  function is producing. For example, the effect of writing to the screen in
   <code-line lang="Haskell" code="compute :: (MonadLog m) => Double -> m
-  Double"></code-line>. This function wants to write something to the screen but
-  if we don't need this feature we can make it pure by ignoring all writing
-  action. Obviously there is no way of ignoring putStrLn and escaping <code-line
-  lang="Haskell" code="IO"></code-line>. 
+  Double"></code-line>. This function wants to write something to the screen, but
+  if we don't need this feature, we can make it pure by ignoring all writing
+  actions. Obviously, there is no way of ignoring <code-line lang="Haskell"
+  code="putStrLn"></code-line> and escaping <code-line lang="Haskell"
+  code="IO"></code-line>.
 </div>
 
-<div class="frame" frame-name="Better environment definition">
-  Monad <code-line lang="Haskell" code="IO"></code-line> does not provide much
+<div class="frame" frame-name="Better Environment Definition">
+  The <code-line lang="Haskell" code="IO"></code-line> monad does not provide much
   information about what is actually required to run correctly. By introducing
-  granular effect type classes. We can see that we cannot run <code-line
-  lang="Haskell" code="fetchUsers :: (MonadDB m) => m [ User ]"></code-line>
-  without first starting the database.  
+  granular effect type classes, we can see that we cannot run <code-line
+  lang="Haskell" code="fetchUsers :: (MonadDB m) => m [User]"></code-line>
+  without first starting the database.
 </div>
 
-<div class="frame" frame-name="Easier debugging">
-  Due to the fact we are able to better track effects of each function, the
-  debugging process is much easier. For example, if we have a problem with a
-  function that prints invalid messages to the screen we are able to narrow down
-  search to functions with writing effect instead of checking all functions with
-  <code-line lang="Haskell" code="IO"></code-line> monad. 
+<div class="frame" frame-name="Easier Debugging">
+  Due to the fact that we are able to better track the effects of each function,
+  the debugging process is much easier. For example, if we have a problem with a
+  function that prints invalid messages to the screen, we are able to narrow down
+  the search to functions with writing effects instead of checking all functions
+  with the <code-line lang="Haskell" code="IO"></code-line> monad.
 </div>
 
 <h3>Effortless Testable Code</h3>
 
 <p>
-  In my opinion the greatest advantage of using granular effect type classes is
-  the ability to test your code without any changes. Let's see example of simple
-  echo function:
+  In my opinion, the greatest advantage of using granular effect type classes is
+  the ability to test your code without any changes. Let's see an example of a
+  simple echo function:
 </p>
 
 <code-block lang="Haskell" [code]="
@@ -195,11 +207,11 @@
 
 <p>
   How can we test it? It uses <code-line lang="Haskell" code="IO"></code-line>
-  and we can't mock <code-line lang="Haskell" code="IO"></code-line> monad or at
+  and we can't mock the <code-line lang="Haskell" code="IO"></code-line> monad, or at
   least it isn't easy. The alternative definition is <code-line lang="Haskell"
-  code="echo :: MonadIO m => m ()"></code-line> also untestable since we would
-  need to mock up <code-line lang="Haskell" code="liftIO :: MonadIO m => IO a ->
-  m a"></code-line> which is as hard as mocking the original function. If we use
+  code="echo :: MonadIO m => m ()"></code-line>, which is also untestable since we would
+  need to mock <code-line lang="Haskell" code="liftIO :: MonadIO m => IO a ->
+  m a"></code-line>, which is as hard as mocking the original function. If we use
   two granular type classes:
 </p>
 
@@ -212,7 +224,7 @@
   ]"></code-block>
 
 <p>
-  We can redefine the echo function as:
+  We can redefine the echo function as follows:
 </p>
 
 <code-block lang="Haskell" [code]="
@@ -223,7 +235,7 @@
   ]"></code-block>
 
 <p>
-  Now we can mockup the effect using testing monad:
+  Now we can mock the effect using a testing monad:
 </p>
 
 <code-block lang="Haskell" [code]="
@@ -236,7 +248,7 @@
   ]"></code-block>
 
 <p>
-  With following instances: 
+  With the following instances:
 </p>
 
 <code-block lang="Haskell" [code]="
@@ -251,18 +263,18 @@
   ]"></code-block>
 
 <p>
-  Now we can test our echo function without an issue. This same approach can be
-  used to mockup connections to external resources like databases of REST
-  endpoints. 
+  Now we can test our echo function without any issues. This same approach can
+  be used to mock connections to external resources like databases or REST
+  endpoints.
 </p>
 
 <h3>Iterative Refactoring Effort</h3>
 
 <p>
-  Transition into granular effect type classes can be done in small steps. If we
-  define a new function we can define it in terms of granular effect type
-  classes, and without any problem use a main function that requires <code-line
-  lang="Haskell" code="IO"></code-line> effect as long as <code-line
+  Transitioning to granular effect type classes can be done in small steps. If
+  we define a new function, we can define it in terms of granular effect type
+  classes, and without any problem use it in a main function that requires
+  <code-line lang="Haskell" code="IO"></code-line> effect as long as <code-line
   lang="Haskell" code="IO"></code-line> is an instance of your effect type
   classes.
 </p>
@@ -278,8 +290,8 @@
   ]"></code-block>
 
 <p>
-  If your function uses a function that uses <code-line
-  lang="Haskell" code="IO"></code-line> you would need to include
+  If your function uses a function with <code-line
+  lang="Haskell" code="IO"></code-line> effect, you would need to include
   <code-line lang="Haskell" code="MonadIO"></code-line> as one of the effects
   until this function is refactored.
 </p>
@@ -294,8 +306,8 @@
 <h3>Summary</h3>
 
 <p>
-  Granular effect type classes make your code easier to maintain, and testable.
-  The refactoring can be done in small steps. The only downside is the
-  requirement of creating those type classes. However the effort is rather
-  minimal in contrast to the vast benefits of using them. 
+  Granular effect type classes make your code easier to maintain and test. The
+  refactoring can be done in small steps. The only downside is the requirement of
+  creating those type classes. However, the effort is minimal compared to the vast
+  benefits of using them.
 </p>
